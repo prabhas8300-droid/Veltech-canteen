@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_curd_rice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#182024"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_curd_rice" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_curd_rice)"/>
+  
+      <circle cx="200" cy="135" r="85" fill="#3f3f46" filter="url(#shadow_curd_rice)"/>
+      <circle cx="200" cy="135" r="78" fill="#52525b"/>
+      <!-- Creamy White Curd Rice -->
+      <circle cx="200" cy="135" r="72" fill="#f8fafc"/>
+      <!-- Mustard seeds -->
+      <circle cx="180" cy="115" r="2.5" fill="#0f172a"/>
+      <circle cx="220" cy="125" r="2" fill="#0f172a"/>
+      <circle cx="170" cy="140" r="2.5" fill="#0f172a"/>
+      <circle cx="205" cy="155" r="2" fill="#0f172a"/>
+      <!-- Ruby Pomegranate Pearls -->
+      <circle cx="195" cy="128" r="4.5" fill="#be123c"/>
+      <circle cx="175" cy="122" r="4" fill="#e11d48"/>
+      <circle cx="215" cy="140" r="4.5" fill="#be123c"/>
+      <circle cx="190" cy="148" r="4" fill="#e11d48"/>
+      <circle cx="225" cy="128" r="4" fill="#be123c"/>
+      <!-- Curry leaves &amp; Green chili -->
+      <path d="M 175,135 Q 182,130 190,135" stroke="#15803d" stroke-width="2.5" fill="none"/>
+      <path d="M 205,142 Q 212,136 218,142" stroke="#15803d" stroke-width="2.5" fill="none"/>
+      <!-- Pickle side dip -->
+      <circle cx="310" cy="115" r="22" fill="#374151" filter="url(#shadow_curd_rice)"/>
+      <circle cx="310" cy="115" r="19" fill="#dc2626"/>
+    
+  <rect x="16" y="16" width="110" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="71.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">LUNCH • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Tempered South Indian Curd Rice</text>
+</svg>

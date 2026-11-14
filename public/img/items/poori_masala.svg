@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_poori_masala" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#241a10"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_poori_masala" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_poori_masala)"/>
+  
+      <ellipse cx="200" cy="140" rx="160" ry="85" fill="#3f3f46" filter="url(#shadow_poori_masala)"/>
+      <circle cx="200" cy="140" r="82" fill="#52525b"/>
+      <circle cx="200" cy="100" r="38" fill="#374151" filter="url(#shadow_poori_masala)"/>
+      <circle cx="200" cy="100" r="34" fill="#eab308"/>
+      <circle cx="195" cy="96" r="6" fill="#ca8a04"/>
+      <circle cx="206" cy="104" r="5" fill="#16a34a"/>
+      <circle cx="140" cy="155" r="54" fill="#d97706" filter="url(#shadow_poori_masala)"/>
+      <circle cx="136" cy="150" r="48" fill="#f59e0b"/>
+      <circle cx="130" cy="142" r="34" fill="#fbbf24" opacity="0.7"/>
+      <circle cx="260" cy="155" r="54" fill="#d97706" filter="url(#shadow_poori_masala)"/>
+      <circle cx="256" cy="150" r="48" fill="#f59e0b"/>
+      <circle cx="250" cy="142" r="34" fill="#fbbf24" opacity="0.7"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">TIFFIN • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Poori Masala (2 pcs)</text>
+</svg>

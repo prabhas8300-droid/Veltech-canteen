@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_potato_chips" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#182029"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_potato_chips" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_potato_chips)"/>
+  
+      <!-- Snack Bowl -->
+      <ellipse cx="200" cy="150" rx="120" ry="60" fill="#1e3a8a" filter="url(#shadow_potato_chips)"/>
+      <ellipse cx="200" cy="140" rx="110" ry="50" fill="#2563eb"/>
+      <!-- Crunchy crinkle-cut chips -->
+      <ellipse cx="160" cy="125" rx="36" ry="22" fill="#ca8a04" transform="rotate(-20 160 125)" filter="url(#shadow_potato_chips)"/>
+      <ellipse cx="160" cy="123" rx="32" ry="18" fill="#fef08a" transform="rotate(-20 160 123)"/>
+      <ellipse cx="230" cy="120" rx="38" ry="24" fill="#ca8a04" transform="rotate(25 230 120)" filter="url(#shadow_potato_chips)"/>
+      <ellipse cx="230" cy="118" rx="34" ry="20" fill="#fef08a" transform="rotate(25 230 118)"/>
+      <ellipse cx="195" cy="105" rx="40" ry="22" fill="#d97706" transform="rotate(-5 195 105)" filter="url(#shadow_potato_chips)"/>
+      <ellipse cx="195" cy="103" rx="36" ry="18" fill="#fef9c3" transform="rotate(-5 195 103)"/>
+      <!-- Spices paprika speckles -->
+      <circle cx="190" cy="100" r="1.5" fill="#dc2626"/>
+      <circle cx="205" cy="106" r="1.5" fill="#dc2626"/>
+      <circle cx="165" cy="122" r="1.5" fill="#dc2626"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">SNACKS • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Crispy Golden Potato Chips</text>
+</svg>

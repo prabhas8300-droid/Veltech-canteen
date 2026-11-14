@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_apsara_pencils" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181b27"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_apsara_pencils" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_apsara_pencils)"/>
+  
+      <!-- Pencil Box -->
+      <rect x="90" y="75" width="220" height="110" rx="8" fill="#18181b" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow_apsara_pencils)"/>
+      <!-- Platinum Silver/Black striped design -->
+      <rect x="95" y="80" width="210" height="100" rx="6" fill="#0f172a"/>
+      <text x="200" y="115" font-family="Impact, sans-serif" font-size="22" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="2">APSARA PLATINUM</text>
+      <text x="200" y="135" font-family="sans-serif" font-size="10" font-weight="800" fill="#38bdf8" text-anchor="middle">EXTRA DARK HB PENCILS (10 PCS)</text>
+      <!-- Pencil drawn sticking out -->
+      <rect x="110" y="152" width="180" height="8" rx="2" fill="#64748b"/>
+      <polygon points="110,152 110,160 96,156" fill="#fde047"/>
+      <polygon points="99,155 99,157 96,156" fill="#0f172a"/>
+    
+  <rect x="16" y="16" width="78" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#6366f1" stroke-width="1.2"/>
+  <text x="55.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#6366f1" text-anchor="middle" letter-spacing="0.8">PENCILS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Apsara Platinum Extra Dark HB Pencils</text>
+</svg>

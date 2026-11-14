@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_lumograph_pencil" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151f2b"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_lumograph_pencil" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_lumograph_pencil)"/>
+  
+      <!-- Classic Blue Body -->
+      <rect x="80" y="125" width="220" height="13" rx="2" fill="#0284c7" filter="url(#shadow_lumograph_pencil)"/>
+      <rect x="270" y="125" width="30" height="13" fill="#0f172a"/>
+      <text x="180" y="134" font-family="sans-serif" font-size="7.5" font-weight="900" fill="#ffffff">STAEDTLER Mars Lumograph 2B</text>
+      <!-- Sharpened wood cone -->
+      <polygon points="80,125 80,138 60,131.5" fill="#fef08a"/>
+      <polygon points="66,129 66,134 60,131.5" fill="#0f172a"/>
+    
+  <rect x="16" y="16" width="78" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#6366f1" stroke-width="1.2"/>
+  <text x="55.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#6366f1" text-anchor="middle" letter-spacing="0.8">PENCILS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Staedtler Mars Lumograph Blue Pencil</text>
+</svg>

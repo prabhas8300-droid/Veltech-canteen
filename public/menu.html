@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu & Mini Store - Annapurna Canteen | Vel Tech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Outfit:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <style>
+    /* Page Layout */
+    .menu-page-layout { display: flex; gap: 0; min-height: calc(100vh - 70px); }
+
+    /* ── Sidebar ── */
+    .menu-sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: white;
+      border-right: 1px solid #E5E7EB;
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 70px;
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+    .sidebar-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #9CA3AF; margin-bottom: 0.8rem; padding: 0 0.5rem; }
+    .sidebar-cat-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border: none;
+      background: none;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: #374151;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.22s ease;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 2px;
+    }
+    .sidebar-cat-btn:hover { background: #FFF3EC; color: #FF6B35; transform: translateX(4px); }
+    .sidebar-cat-btn.active { background: linear-gradient(135deg, #FF6B35, #E85D04); color: white; font-weight: 700; transform: translateX(0); }
+    .sidebar-cat-btn .cat-icon { font-size: 1.1rem; width: 22px; }
+    .sidebar-divider { border: none; border-top: 1px solid #E5E7EB; margin: 0.8rem 0; }
+
+    /* ── Main content ── */
+    .menu-main { flex: 1; min-width: 0; background: #F9FAFB; }
+
+    /* ── Top bar ── */
+    .menu-topbar {
+      background: white;
+      border-bottom: 1px solid #E5E7EB;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 70px;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #F3F4F6;
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      flex: 1;
+      max-width: 400px;
+    }
+    .search-bar input { border: none; background: none; outline: none; font-family: 'Poppins', sans-serif; font-size: 0.88rem; width: 100%; }
+    .search-bar input::placeholder { color: #9CA3AF; }
+
+    .sort-select {
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      padding: 0.5rem 0.8rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.84rem;
+      outline: none;
+      cursor: pointer;
+    }
+    .view-toggle { display: flex; gap: 4px; }
+    .view-btn { background: #F3F4F6; border: none; padding: 0.5rem 0.75rem; border-radius: 8px; cursor: pointer; color: #6B7280; transition: all 0.2s; }
+    .view-btn.active { background: #FF6B35; color: white; }
+    .cart-floating-btn {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, #FF6B35, #E85D04);
+      color: white; border: none; padding: 0.6rem 1.2rem;
+      border-radius: 50px; font-size: 0.86rem; font-weight: 600;
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      box-shadow: 0 4px 15px rgba(255,107,53,0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .cart-floating-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,107,53,0.5); }
+
+    /* ── Filter chips ── */
+    .filter-chips {
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      background: white;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #F3F4F6;
+      border: 1px solid #E5E7EB;
+      border-radius: 50px;
+      padding: 3px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-chip.active { background: #FF6B35; color: white; border-color: #FF6B35; }
+    .filter-chip:hover:not(.active) { border-color: #FF6B35; color: #FF6B35; }
+
+    /* ── Grid ── */
+    .menu-content { padding: 1.5rem; }
+    .items-count { font-size: 0.84rem; color: #6B7280; margin-bottom: 1rem; }
+    .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.3rem; }
+    .food-grid.list-view { grid-template-columns: 1fr; }
+    .food-grid.list-view .food-card { flex-direction: row; height: 110px; }
+    .food-grid.list-view .food-card-img-wrap { width: 110px; height: 110px; flex-shrink: 0; }
+    .food-grid.list-view .food-card-body { display: flex; align-items: center; gap: 1rem; flex: 1; padding: 0.75rem; }
+    .food-grid.list-view .food-card-name { font-size: 0.88rem; }
+    .food-grid.list-view .food-card-desc { display: none; }
+
+    /* ── Food card ── */
+    .food-card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.07); border: 1px solid #F3F4F6; }
+    .food-card-img-wrap { position: relative; overflow: hidden; height: 170px; }
+    .food-card-img { width: 100%; height: 100%; object-fit: cover; }
+    .food-card-body { padding: 0.9rem; }
+    .food-card-category { font-size: 0.7rem; font-weight: 700; color: #FF6B35; text-transform: uppercase; letter-spacing: 0.5px; }
+    .food-card-name { font-size: 0.9rem; font-weight: 700; color: #1A1A2E; margin: 3px 0; }
+    .food-card-desc { font-size: 0.75rem; color: #6B7280; line-height: 1.4; min-height: 30px; }
+    .food-card-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 5px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #F3F4F6; }
+    .food-price { font-size: 1.05rem; font-weight: 800; color: #FF6B35; }
+
+    /* ── Empty / Loading ── */
+    .loading-container { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 4rem; color: #6B7280; }
+    .spinner { width: 40px; height: 40px; border: 3px solid #E5E7EB; border-top-color: #FF6B35; border-radius: 50%; animation: spin 0.9s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty-state { text-align: center; padding: 4rem 1rem; color: #6B7280; }
+    .empty-state .empty-icon { font-size: 4rem; margin-bottom: 1rem; display: block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .menu-sidebar { display: none; }
+      .menu-page-layout { flex-direction: column; }
+      .menu-main { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar" id="mainNavbar">
+  <div class="navbar-inner">
+    <a href="/home.html" class="navbar-brand">
+      <div class="logo-icon">🍽️</div>
+      <div class="brand-text">
+        <div class="canteen-name">Annapurna</div>
+        <div class="college-name">Vel Tech University</div>
+      </div>
+    </a>
+    <div class="navbar-links" id="navLinks">
+      <a href="/home.html"><i class="fas fa-home"></i> Home</a>
+      <a href="/menu.html" class="active"><i class="fas fa-utensils"></i> Menu</a>
+      <a href="/orders.html"><i class="fas fa-receipt"></i> My Orders</a>
+      <a href="/cart.html" class="cart-link" id="cartNavLink">
+        <i class="fas fa-shopping-cart"></i> Cart
+        <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+      </a>
+      <span class="navbar-user-name" id="navUserName" style="font-size:0.82rem;color:#6B7280;padding:0.4rem 0.5rem;"></span>
+      <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ============ LAYOUT ============ -->
+<div class="menu-page-layout">
+  <!-- Sidebar -->
+  <aside class="menu-sidebar" id="menuSidebar">
+    <div class="sidebar-title">🍽️ Food Categories</div>
+    <div id="foodCatList">
+      <button class="sidebar-cat-btn active" onclick="setCategory('All')"><span class="cat-icon">🍴</span> All Items</button>
+    </div>
+    <hr class="sidebar-divider"/>
+    <div class="sidebar-title">✏️ Mini Store</div>
+    <div id="statCatList">
+      <button class="sidebar-cat-btn" onclick="setCategory('Books')"><span class="cat-icon">📚</span> Books</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Notebooks')"><span class="cat-icon">📓</span> Notebooks</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Pens')"><span class="cat-icon">🖊️</span> Pens</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Pencils')"><span class="cat-icon">✏️</span> Pencils</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Erasers')"><span class="cat-icon">🧹</span> Erasers</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Sharpeners')"><span class="cat-icon">📌</span> Sharpeners</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Rulers')"><span class="cat-icon">📏</span> Rulers</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Files')"><span class="cat-icon">📁</span> Files</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Other Stationery')"><span class="cat-icon">📌</span> Other Stationery</button>
+    </div>
+    <hr class="sidebar-divider"/>
+    <div class="sidebar-title">🥤 Drinks & More</div>
+    <div id="drinksCatList">
+      <button class="sidebar-cat-btn" onclick="setCategory('Drinks')"><span class="cat-icon">🥤</span> Drinks</button>
+      <button class="sidebar-cat-btn" onclick="setCategory('Chocolates')"><span class="cat-icon">🍫</span> Chocolates</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="menu-main">
+    <!-- Top bar -->
+    <div class="menu-topbar">
+      <div class="search-bar">
+        <i class="fas fa-search" style="color:#9CA3AF;"></i>
+        <input type="text" id="searchInput" placeholder="Search menu & stationery..." />
+      </div>
+      <select class="sort-select" id="sortSelect" onchange="filterAndRender()">
+        <option value="default">Sort: Default</option>
+        <option value="price_asc">Price: Low → High</option>
+        <option value="price_desc">Price: High → Low</option>
+        <option value="name_asc">Name: A → Z</option>
+      </select>
+      <div class="view-toggle">
+        <button class="view-btn active" id="gridViewBtn" onclick="setViewMode('grid')" title="Grid view"><i class="fas fa-th-large"></i></button>
+        <button class="view-btn" id="listViewBtn" onclick="setViewMode('list')" title="List view"><i class="fas fa-list"></i></button>
+      </div>
+      <a href="/cart.html" class="cart-floating-btn">
+        <i class="fas fa-shopping-cart"></i> Cart
+        <span id="cartTopBadge" style="background:white;color:#FF6B35;border-radius:50%;width:20px;height:20px;font-size:0.7rem;font-weight:700;display:none;align-items:center;justify-content:center;">0</span>
+      </a>
+    </div>
+
+    <!-- Filter chips -->
+    <div class="filter-chips">
+      <span class="filter-chip active" id="chipAll" onclick="setDietary('all')">🍴 All</span>
+      <span class="filter-chip" id="chipVeg" onclick="setDietary('veg')">🟢 Veg</span>
+      <span class="filter-chip" id="chipNonveg" onclick="setDietary('non-veg')">🔴 Non-Veg</span>
+      <span class="filter-chip" id="chipStat" onclick="filterStationery()">✏️ Stationery</span>
+      <span class="filter-chip" id="chipSpecial" onclick="toggleSpecial()">⭐ Specials</span>
+    </div>
+
+    <!-- Content -->
+    <div class="menu-content">
+      <div class="items-count" id="itemsCount"></div>
+      <div class="food-grid" id="menuGrid">
+        <div class="loading-container"><div class="spinner"></div><p>Loading menu...</p></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Product Modal -->
+<div id="productModal" class="modal-overlay" onclick="if(event.target===this)closeProductModal()">
+  <div class="product-modal-content" onclick="event.stopPropagation()" style="max-width:600px;">
+    <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding:1.5rem;" id="modalInner">
+      <div>
+        <img id="modalImg" src="" alt="" style="width:100%;height:260px;object-fit:cover;border-radius:16px;" onerror="this.src='/img/items/default_item.svg'" />
+      </div>
+      <div>
+        <span class="food-card-category" id="modalCategory"></span>
+        <h2 id="modalName" style="margin:8px 0;font-size:1.3rem;font-weight:800;color:#1A1A2E;"></h2>
+        <p id="modalDesc" style="color:#6B7280;font-size:0.86rem;line-height:1.5;margin-bottom:12px;"></p>
+        <div class="food-price" id="modalPrice" style="font-size:1.6rem;margin-bottom:16px;"></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <button class="qty-btn" onclick="modalQtyChange(-1)">−</button>
+          <span id="modalQty" style="font-size:1.1rem;font-weight:700;min-width:28px;text-align:center;">1</span>
+          <button class="qty-btn" onclick="modalQtyChange(1)">+</button>
+        </div>
+        <button class="btn btn-primary" style="width:100%;padding:14px;font-size:1rem;" onclick="addFromModal()">
+          <i class="fas fa-shopping-cart"></i> Add to Cart
+        </button>
+        <p id="modalAvail" style="margin-top:8px;font-size:0.78rem;color:#10b981;text-align:center;"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/auth.js?v=4"></script>
+<script src="/js/menu.js?v=4"></script>
+<script>
+  function resizeModal() {
+    const inner = document.getElementById('modalInner');
+    if (inner) inner.style.gridTemplateColumns = window.innerWidth < 580 ? '1fr' : '1fr 1fr';
+  }
+  window.addEventListener('resize', resizeModal);
+  resizeModal();
+</script>
+</body>
+</html>

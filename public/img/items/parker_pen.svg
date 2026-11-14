@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_parker_pen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b2027"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_parker_pen" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_parker_pen)"/>
+  
+      <!-- Brushed Stainless Steel Body -->
+      <rect x="90" y="124" width="140" height="14" rx="4" fill="#cbd5e1" filter="url(#shadow_parker_pen)"/>
+      <rect x="95" y="126" width="130" height="4" fill="#f8fafc" opacity="0.8"/>
+      <!-- Parker Cap with Arrow Clip -->
+      <rect x="220" y="122" width="90" height="18" rx="4" fill="#94a3b8" filter="url(#shadow_parker_pen)"/>
+      <!-- Signature Parker Arrow Clip -->
+      <path d="M 230,118 L 290,118 L 295,121 L 290,124 L 230,124 Z" fill="#475569"/>
+      <!-- Fine roller tip -->
+      <polygon points="90,126 90,136 72,131" fill="#475569"/>
+      <circle cx="70" cy="131" r="1.5" fill="#0f172a"/>
+    
+  <rect x="16" y="16" width="54" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="43.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#3b82f6" text-anchor="middle" letter-spacing="0.8">PENS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Parker Vector Stainless Steel Rollerball</text>
+</svg>

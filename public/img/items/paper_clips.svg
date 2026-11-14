@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_paper_clips" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b2229"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_paper_clips" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_paper_clips)"/>
+  
+      <!-- Colorful wire paper clips -->
+      <path d="M 120,95 L 120,155 Q 120,175 135,175 Q 150,175 150,155 L 150,110 Q 150,90 138,90 Q 128,90 128,110 L 128,145" stroke="#dc2626" stroke-width="4.5" fill="none" stroke-linecap="round" filter="url(#shadow_paper_clips)"/><path d="M 160,95 L 160,155 Q 160,175 175,175 Q 190,175 190,155 L 190,110 Q 190,90 178,90 Q 168,90 168,110 L 168,145" stroke="#2563eb" stroke-width="4.5" fill="none" stroke-linecap="round" filter="url(#shadow_paper_clips)"/><path d="M 200,95 L 200,155 Q 200,175 215,175 Q 230,175 230,155 L 230,110 Q 230,90 218,90 Q 208,90 208,110 L 208,145" stroke="#16a34a" stroke-width="4.5" fill="none" stroke-linecap="round" filter="url(#shadow_paper_clips)"/><path d="M 240,95 L 240,155 Q 240,175 255,175 Q 270,175 270,155 L 270,110 Q 270,90 258,90 Q 248,90 248,110 L 248,145" stroke="#eab308" stroke-width="4.5" fill="none" stroke-linecap="round" filter="url(#shadow_paper_clips)"/>
+    
+  <rect x="16" y="16" width="102" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#eab308" stroke-width="1.2"/>
+  <text x="67.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#eab308" text-anchor="middle" letter-spacing="0.8">STATIONERY</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Vinyl-Coated Paper Clips (Box of 100)</text>
+</svg>

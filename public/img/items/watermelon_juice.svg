@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_watermelon_juice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#261416"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_watermelon_juice" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_watermelon_juice)"/>
+  
+      <!-- Glass -->
+      <path d="M 160,70 L 172,210 L 228,210 L 240,70 Z" fill="#ffffff" opacity="0.25" filter="url(#shadow_watermelon_juice)"/>
+      <!-- Ruby Red Watermelon Juice -->
+      <path d="M 164,88 L 174,206 L 226,206 L 236,88 Z" fill="#dc2626"/>
+      <ellipse cx="200" cy="88" rx="36" ry="10" fill="#ef4444"/>
+      <!-- Floating black watermelon seeds -->
+      <ellipse cx="185" cy="115" rx="2" ry="3.5" fill="#18181b"/>
+      <ellipse cx="215" cy="135" rx="2" ry="3.5" fill="#18181b"/>
+      <ellipse cx="190" cy="155" rx="2" ry="3.5" fill="#18181b"/>
+      <!-- Ice cubes -->
+      <rect x="180" y="100" width="18" height="18" rx="3" fill="#ffffff" opacity="0.5" transform="rotate(10 180 100)"/>
+      <!-- Straw -->
+      <line x1="215" y1="40" x2="200" y2="185" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+      <!-- Watermelon Wedge on Plate -->
+      <path d="M 280,180 A 50 50 0 0 1 330,230 L 280,230 Z" fill="#15803d" transform="rotate(-35 280 180)" filter="url(#shadow_watermelon_juice)"/>
+      <path d="M 285,185 A 44 44 0 0 1 325,225 L 285,225 Z" fill="#ef4444" transform="rotate(-35 280 180)"/>
+      <!-- Fresh Mint Sprig -->
+      <path d="M 165,70 Q 155,55 170,58 Q 175,70 165,70 Z" fill="#22c55e"/>
+    
+  <rect x="16" y="16" width="134" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#ef4444" stroke-width="1.2"/>
+  <text x="83.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#ef4444" text-anchor="middle" letter-spacing="0.8">DRINKS • FRESH</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Fresh Watermelon Juice with Mint</text>
+</svg>

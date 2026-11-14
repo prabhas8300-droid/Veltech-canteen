@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_french_fries" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#271917"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_french_fries" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_french_fries)"/>
+  
+      <!-- Red Fry Cup -->
+      <path d="M 150,110 L 160,210 L 240,210 L 250,110 Z" fill="#b91c1c" filter="url(#shadow_french_fries)"/>
+      <path d="M 152,112 L 161,208 L 239,208 L 248,112 Z" fill="#dc2626"/>
+      <circle cx="200" cy="160" r="16" fill="#fef08a"/>
+      <!-- Hot Fries Sticking Out -->
+      <rect x="165" y="55" width="10" height="80" rx="2" fill="#fef08a" transform="rotate(-15 165 55)" filter="url(#shadow_french_fries)"/>
+      <rect x="180" y="45" width="10" height="90" rx="2" fill="#fef08a" transform="rotate(-5 180 45)" filter="url(#shadow_french_fries)"/>
+      <rect x="195" y="40" width="10" height="95" rx="2" fill="#fde047" filter="url(#shadow_french_fries)"/>
+      <rect x="210" y="50" width="10" height="85" rx="2" fill="#fef08a" transform="rotate(8 210 50)" filter="url(#shadow_french_fries)"/>
+      <rect x="225" y="60" width="10" height="75" rx="2" fill="#fde047" transform="rotate(18 225 60)" filter="url(#shadow_french_fries)"/>
+      <!-- Red Dip Bowl -->
+      <circle cx="310" cy="165" r="24" fill="#374151" filter="url(#shadow_french_fries)"/>
+      <circle cx="310" cy="165" r="20" fill="#ffffff"/>
+      <circle cx="310" cy="165" r="17" fill="#dc2626"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">SNACKS • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Peri Peri Golden French Fries</text>
+</svg>

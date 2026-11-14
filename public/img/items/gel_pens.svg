@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_gel_pens" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1f29"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_gel_pens" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_gel_pens)"/>
+  
+      <rect x="90" y="85" width="200" height="11" rx="3" fill="#2563eb" filter="url(#shadow_gel_pens)"/><rect x="180" y="85" width="40" height="11" fill="#e2e8f0" opacity="0.3"/><polygon points="90,86 90,95 75,90.5" fill="#ca8a04"/><rect x="90" y="107" width="200" height="11" rx="3" fill="#0f172a" filter="url(#shadow_gel_pens)"/><rect x="180" y="107" width="40" height="11" fill="#e2e8f0" opacity="0.3"/><polygon points="90,108 90,117 75,112.5" fill="#ca8a04"/><rect x="90" y="129" width="200" height="11" rx="3" fill="#dc2626" filter="url(#shadow_gel_pens)"/><rect x="180" y="129" width="40" height="11" fill="#e2e8f0" opacity="0.3"/><polygon points="90,130 90,139 75,134.5" fill="#ca8a04"/><rect x="90" y="151" width="200" height="11" rx="3" fill="#16a34a" filter="url(#shadow_gel_pens)"/><rect x="180" y="151" width="40" height="11" fill="#e2e8f0" opacity="0.3"/><polygon points="90,152 90,161 75,156.5" fill="#ca8a04"/><rect x="90" y="173" width="200" height="11" rx="3" fill="#9333ea" filter="url(#shadow_gel_pens)"/><rect x="180" y="173" width="40" height="11" fill="#e2e8f0" opacity="0.3"/><polygon points="90,174 90,183 75,178.5" fill="#ca8a04"/>
+    
+  <rect x="16" y="16" width="54" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="43.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#3b82f6" text-anchor="middle" letter-spacing="0.8">PENS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Japanese Gel Pen Set (Pack of 5)</text>
+</svg>

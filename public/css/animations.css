@@ -1,0 +1,859 @@
+/* ============================================================
+   SMART CANTEEN - ANIMATIONS & INTERACTIVE EFFECTS SYSTEM
+   Veltech Annapurna Canteen - Premium Animation Library
+   ============================================================ */
+
+/* ---- Page Load ---- */
+@keyframes pageSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+body { animation: pageSlideIn 0.45s ease both; }
+
+/* ---- Smooth scroll ---- */
+html { scroll-behavior: smooth; }
+
+/* ================================================================
+   CART FLY ANIMATION
+   ================================================================ */
+.fly-bubble {
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 99999;
+  border: 3px solid #FF6B35;
+  box-shadow: 0 4px 20px rgba(255,107,53,0.6);
+}
+
+@keyframes cartBounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25%       { transform: scale(1.35) rotate(-8deg); }
+  50%       { transform: scale(1.45) rotate(0deg); }
+  75%       { transform: scale(1.25) rotate(8deg); }
+}
+.cart-bounce { animation: cartBounce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+
+/* ================================================================
+   PRODUCT CARD BASE STYLES
+   ================================================================ */
+.food-card {
+  position: relative !important;
+  overflow: hidden !important;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ================================================================
+   BUTTON EFFECTS
+   ================================================================ */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.22s ease,
+              background 0.22s ease !important;
+}
+.btn:hover  { transform: translateY(-2px) scale(1.04) !important; }
+.btn:active { transform: scale(0.96) !important; }
+
+/* Ripple */
+.btn::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  background: rgba(255,255,255,0.35);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.45s ease, height 0.45s ease, opacity 0.45s ease;
+  opacity: 0;
+}
+.btn:active::after {
+  width: 220px; height: 220px;
+  opacity: 1;
+  transition: none;
+}
+
+/* Success state after add-to-cart */
+@keyframes successPop {
+  0%   { background: var(--primary); transform: scale(1); }
+  40%  { background: #10b981; transform: scale(1.18); }
+  100% { background: #10b981; transform: scale(1); }
+}
+.btn-added { animation: successPop 0.45s ease forwards; color: white !important; }
+
+/* ================================================================
+   SKELETON / SHIMMER LOADING
+   ================================================================ */
+@keyframes shimmer {
+  0%   { background-position: -800px 0; }
+  100% { background-position: 800px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 8px;
+}
+.skeleton-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 300px;
+}
+.skeleton-img  { height: 180px; }
+.skeleton-line { height: 14px; margin: 8px 12px; }
+.skeleton-line.short { width: 60%; }
+
+/* ================================================================
+   SCROLL REVEAL
+   ================================================================ */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Stagger children */
+.food-card:nth-child(1) { transition-delay: 0.04s !important; }
+.food-card:nth-child(2) { transition-delay: 0.08s !important; }
+.food-card:nth-child(3) { transition-delay: 0.12s !important; }
+.food-card:nth-child(4) { transition-delay: 0.16s !important; }
+.food-card:nth-child(5) { transition-delay: 0.20s !important; }
+.food-card:nth-child(6) { transition-delay: 0.24s !important; }
+
+/* ================================================================
+   HERO BANNER ANIMATIONS
+   ================================================================ */
+@keyframes heroTextSlide {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-badge    { animation: heroTextSlide 0.65s ease 0.1s both; }
+.hero-title    { animation: heroTextSlide 0.65s ease 0.22s both; }
+.hero-subtitle { animation: heroTextSlide 0.65s ease 0.34s both; }
+.hero-actions  { animation: heroTextSlide 0.65s ease 0.46s both; }
+.hero-search-box { animation: heroTextSlide 0.65s ease 0.5s both; }
+
+/* Animated gradient hero overlay */
+@keyframes gradientPulse {
+  0%   { opacity: 0.82; }
+  50%  { opacity: 0.72; }
+  100% { opacity: 0.82; }
+}
+.hero-overlay { animation: gradientPulse 4s ease-in-out infinite; }
+
+/* Floating emojis in hero */
+@keyframes floatEmoji {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+  33%  { transform: translateY(-18px) rotate(8deg); opacity: 1; }
+  66%  { transform: translateY(-8px) rotate(-5deg); opacity: 0.9; }
+  100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+}
+.floating-emoji {
+  position: absolute;
+  font-size: 2rem;
+  pointer-events: none;
+  animation: floatEmoji var(--dur, 4s) ease-in-out var(--delay, 0s) infinite;
+  user-select: none;
+}
+
+/* Hero slider fade */
+@keyframes heroFade {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-slide.active { opacity: 1; }
+
+/* ================================================================
+   NAVBAR
+   ================================================================ */
+.navbar { transition: box-shadow 0.3s ease, background 0.3s ease !important; }
+.navbar.scrolled {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12) !important;
+  background: rgba(255,255,255,0.97) !important;
+  backdrop-filter: blur(16px);
+}
+
+/* Navbar link underline */
+.navbar-links a { position: relative; }
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.navbar-links a:hover::after,
+.navbar-links a.active::after { width: 70%; }
+
+/* ================================================================
+   CATEGORY TABS / PILLS
+   ================================================================ */
+.category-tab, .cat-pill {
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+.category-tab:hover, .cat-pill:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 20px rgba(255,107,53,0.25) !important;
+}
+@keyframes tabActivePulse {
+  from { transform: scale(0.9); }
+  to   { transform: scale(1); }
+}
+.category-tab.active { animation: tabActivePulse 0.3s ease; }
+
+/* ================================================================
+   CART COUNT BADGE
+   ================================================================ */
+@keyframes badgePop {
+  0%   { transform: scale(0) rotate(-10deg); }
+  60%  { transform: scale(1.3) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.cart-badge-new { animation: badgePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* ================================================================
+   TOAST NOTIFICATION
+   ================================================================ */
+@keyframes toastIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+@keyframes toastOut {
+  from { transform: translateX(0);   opacity: 1; }
+  to   { transform: translateX(120%); opacity: 0; }
+}
+.toast-notify {
+  animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.toast-notify.leaving {
+  animation: toastOut 0.3s ease forwards;
+}
+
+/* ================================================================
+   PRODUCT MODAL
+   ================================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,20,0.65);
+  z-index: 8000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+}
+.modal-overlay.open { display: flex; }
+
+@keyframes modalUp {
+  from { opacity: 0; transform: translateY(60px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+.product-modal-content {
+  background: white;
+  border-radius: 24px;
+  max-width: 640px;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: background 0.2s;
+}
+.modal-close-btn:hover { background: #e2e8f0; }
+
+/* ================================================================
+   QUANTITY CONTROLS
+   ================================================================ */
+.qty-btn {
+  background: #f1f5f9;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1) !important;
+  font-family: 'Poppins', sans-serif;
+}
+.qty-btn:hover {
+  background: var(--primary) !important;
+  color: white !important;
+  transform: scale(1.15) !important;
+}
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.qty-display {
+  font-weight: 700;
+  font-size: 0.9rem;
+  min-width: 24px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+/* ================================================================
+   BADGES & PILLS
+   ================================================================ */
+.diet-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+.diet-badge.veg   { background: rgba(16,185,129,0.9); color: white; }
+.diet-badge.nonveg { background: rgba(239,68,68,0.9);  color: white; }
+.diet-badge.stationary { background: rgba(139,92,246,0.9); color: white; }
+
+.special-ribbon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg,#f59e0b,#d97706);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  z-index: 2;
+}
+
+/* ================================================================
+   FOOD CARD IMG WRAP
+   ================================================================ */
+.food-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ================================================================
+   CART PAGE ANIMATIONS
+   ================================================================ */
+@keyframes cartItemIn {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.cart-item-row { animation: cartItemIn 0.4s ease both; }
+.cart-item-row:nth-child(1) { animation-delay: 0.04s; }
+.cart-item-row:nth-child(2) { animation-delay: 0.08s; }
+.cart-item-row:nth-child(3) { animation-delay: 0.12s; }
+.cart-item-row:nth-child(4) { animation-delay: 0.16s; }
+.cart-item-row:nth-child(5) { animation-delay: 0.20s; }
+
+@keyframes slideOutLeft {
+  to { opacity: 0; transform: translateX(-50px); max-height: 0; padding: 0; margin: 0; }
+}
+.cart-item-removing {
+  animation: slideOutLeft 0.35s ease forwards;
+  overflow: hidden;
+}
+
+@keyframes totalFlash {
+  0%, 100% { color: var(--primary); }
+  50%       { color: #10b981; transform: scale(1.05); }
+}
+.total-updated { animation: totalFlash 0.5s ease; }
+
+/* ================================================================
+   ORDERS PAGE - TIMELINE
+   ================================================================ */
+@keyframes timelinePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(255,107,53,0); }
+}
+.order-status-pending .status-dot  { animation: timelinePulse 1.5s ease-in-out infinite; }
+
+@keyframes orderCardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.order-card { animation: orderCardIn 0.5s ease both; }
+.order-card:nth-child(1) { animation-delay: 0.05s; }
+.order-card:nth-child(2) { animation-delay: 0.10s; }
+.order-card:nth-child(3) { animation-delay: 0.15s; }
+
+/* ================================================================
+   ADMIN DASHBOARD
+   ================================================================ */
+@keyframes statCardIn {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.stat-card { animation: statCardIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+.stat-card:nth-child(1) { animation-delay: 0.06s; }
+.stat-card:nth-child(2) { animation-delay: 0.12s; }
+.stat-card:nth-child(3) { animation-delay: 0.18s; }
+.stat-card:nth-child(4) { animation-delay: 0.24s; }
+.stat-card:nth-child(5) { animation-delay: 0.30s; }
+.stat-card:nth-child(6) { animation-delay: 0.36s; }
+
+@keyframes countUp {
+  from { opacity:0; transform: translateY(10px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+.stat-value { animation: countUp 0.6s ease 0.3s both; }
+
+/* ================================================================
+   SPINNER UPGRADE
+   ================================================================ */
+@keyframes spinnerGlow {
+  0%   { transform: rotate(0deg);   border-top-color: var(--primary); }
+  33%  { border-top-color: #10b981; }
+  66%  { border-top-color: #3b82f6; }
+  100% { transform: rotate(360deg); border-top-color: var(--primary); }
+}
+.spinner {
+  animation: spinnerGlow 0.9s linear infinite !important;
+}
+
+/* ================================================================
+   CATEGORY CARDS (homepage)
+   ================================================================ */
+.cat-card {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              box-shadow 0.3s ease !important;
+  cursor: pointer;
+}
+.cat-card:hover {
+  transform: translateY(-10px) scale(1.04) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18) !important;
+}
+@keyframes catCardIn {
+  from { opacity:0; transform: scale(0.85) translateY(20px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+.cat-card { animation: catCardIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+.cat-card:nth-child(1) { animation-delay: 0.05s; }
+.cat-card:nth-child(2) { animation-delay: 0.10s; }
+.cat-card:nth-child(3) { animation-delay: 0.15s; }
+.cat-card:nth-child(4) { animation-delay: 0.20s; }
+.cat-card:nth-child(5) { animation-delay: 0.25s; }
+.cat-card:nth-child(6) { animation-delay: 0.30s; }
+.cat-card:nth-child(7) { animation-delay: 0.35s; }
+
+/* ================================================================
+   PROMO CARD
+   ================================================================ */
+.promo-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+  cursor: pointer;
+}
+.promo-card:hover {
+  transform: scale(1.03) !important;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25) !important;
+}
+
+/* ================================================================
+   PRICE SHIMMER
+   ================================================================ */
+@keyframes priceGlow {
+  0%, 100% { text-shadow: none; }
+  50%       { text-shadow: 0 0 12px rgba(255,107,53,0.45); }
+}
+.food-price { animation: priceGlow 2.5s ease-in-out infinite; }
+
+/* ================================================================
+   FLOATING BADGE PULSE (special/hero badges)
+   ================================================================ */
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+.hero-badge { animation: badgeFloat 3s ease-in-out infinite, heroTextSlide 0.65s ease 0.1s both; }
+
+/* ================================================================
+   CHECKOUT PAGE
+   ================================================================ */
+@keyframes checkoutSectionIn {
+  from { opacity:0; transform: translateX(-20px); }
+  to   { opacity:1; transform: translateX(0); }
+}
+.checkout-section { animation: checkoutSectionIn 0.4s ease both; }
+.checkout-section:nth-child(2) { animation-delay: 0.1s; }
+.checkout-section:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes paymentCardHover { }
+.payment-method-card {
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.payment-method-card:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(255,107,53,0.2) !important;
+}
+.payment-method-card.selected {
+  animation: tabActivePulse 0.3s ease;
+}
+
+@keyframes successBounce {
+  0%   { transform: scale(0) rotate(-15deg); opacity:0; }
+  60%  { transform: scale(1.2) rotate(5deg); opacity:1; }
+  100% { transform: scale(1) rotate(0deg); opacity:1; }
+}
+.success-icon { animation: successBounce 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.2s both; }
+
+/* ================================================================
+   GOLD FLASH ANIMATION SUITE & INTERACTIVE MOUSE / TOUCH ENGINE
+   ================================================================ */
+
+/* 1. Card Gold Flash Sheen, 3D Perspective Tilt & Touch Effects */
+.food-card {
+  position: relative !important;
+  overflow: hidden !important;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-scale: 1;
+  --tilt-ty: 0px;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-scale, 1)) translateY(var(--tilt-ty, 0px)) !important;
+  transition: transform 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease !important;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Diagonal Gold Sheen Sweep */
+.food-card::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -120%;
+  width: 70%;
+  height: 220%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 215, 0, 0.12) 20%,
+    rgba(255, 223, 0, 0.55) 48%,
+    rgba(255, 255, 255, 0.9) 55%,
+    rgba(255, 215, 0, 0.45) 65%,
+    transparent 100%
+  );
+  transform: rotate(32deg);
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.food-card:hover::before,
+.food-card.touch-active::before {
+  opacity: 1;
+  animation: goldFlashSweep 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Dynamic Radial Gold Spotlight following cursor */
+.food-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 220px at var(--spot-x, 50%) var(--spot-y, 50%),
+    rgba(255, 223, 0, 0.3) 0%,
+    rgba(255, 180, 0, 0.12) 45%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 11;
+  border-radius: inherit;
+  transition: opacity 0.25s ease;
+}
+
+.food-card:hover::after,
+.food-card.touch-active::after {
+  opacity: 1;
+}
+
+.food-card:hover {
+  --tilt-scale: 1.035;
+  --tilt-ty: -8px;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-scale, 1.035)) translateY(var(--tilt-ty, -8px)) !important;
+  box-shadow: 0 22px 55px rgba(255, 180, 0, 0.4), 0 0 28px rgba(255, 215, 0, 0.35) !important;
+  border-color: #FFD700 !important;
+  z-index: 4;
+}
+
+.food-card.touch-active {
+  --tilt-scale: 1.045;
+  --tilt-ty: -10px;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--tilt-scale, 1.045)) translateY(var(--tilt-ty, -10px)) !important;
+  box-shadow: 0 25px 65px rgba(255, 180, 0, 0.52), 0 0 35px rgba(255, 215, 0, 0.45) !important;
+  border-color: #FFD700 !important;
+  z-index: 5;
+}
+
+.food-card-img {
+  transition: transform 0.45s ease !important;
+}
+.food-card:hover .food-card-img,
+.food-card.touch-active .food-card-img {
+  transform: scale(1.08) !important;
+}
+
+@keyframes goldFlashSweep {
+  0% {
+    left: -120%;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    left: 160%;
+    opacity: 0;
+  }
+}
+
+/* Touch Golden Ripple on Items */
+.gold-touch-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 223, 0, 0.7) 0%, rgba(255, 180, 0, 0.32) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 14;
+  transform: translate(-50%, -50%) scale(0);
+  animation: touchRippleBurst 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes touchRippleBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0.15);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* Cursor Golden Sparkle Trail (Desktop & Touch) */
+@keyframes cursorSparkleDrift {
+  0% {
+    transform: translate(-50%, -50%) scale(0.85) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 14px))) scale(1.3) rotate(var(--rot, 45deg));
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 32px))) scale(0) rotate(calc(var(--rot, 45deg) + 90deg));
+    opacity: 0;
+  }
+}
+
+.cursor-gold-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999999;
+  color: #FFD700;
+  font-size: 14px;
+  line-height: 1;
+  text-shadow: 0 0 8px #FFD700, 0 0 16px #FFA500, 0 0 24px #FF8C00;
+  animation: cursorSparkleDrift 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  user-select: none;
+}
+
+/* 2. Special Ribbon Gold Flash & Glowing Halo */
+@keyframes goldRibbonFlash {
+  0%, 100% {
+    background: linear-gradient(135deg, #FFD700 0%, #F59E0B 50%, #D97706 100%) !important;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.6), 0 2px 6px rgba(0,0,0,0.15);
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    background: linear-gradient(135deg, #FFF3A8 0%, #FFD700 45%, #F59E0B 100%) !important;
+    box-shadow: 0 0 22px rgba(255, 215, 0, 0.95), 0 0 38px rgba(255, 180, 0, 0.7);
+    transform: scale(1.08);
+    filter: brightness(1.25);
+  }
+}
+
+.special-ribbon {
+  animation: goldRibbonFlash 2.2s ease-in-out infinite !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  color: #3B2000 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 3. Gold Price Flash */
+@keyframes goldPriceFlash {
+  0%, 100% {
+    color: #FF6B35;
+    text-shadow: none;
+    transform: scale(1);
+  }
+  50% {
+    color: #D97706;
+    text-shadow: 0 0 14px rgba(255, 215, 0, 0.85), 0 0 26px rgba(255, 180, 0, 0.55);
+    transform: scale(1.06);
+  }
+}
+
+.food-price {
+  animation: goldPriceFlash 2.6s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+/* 4. Button Gold Flash & Shockwave */
+@keyframes goldFlashButton {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.9);
+  }
+  25% {
+    transform: scale(1.15);
+    background: linear-gradient(135deg, #FFF08A, #FFD700, #F59E0B) !important;
+    color: #381E00 !important;
+    box-shadow: 0 0 28px 8px rgba(255, 215, 0, 0.95), 0 0 50px rgba(255, 180, 0, 0.7) !important;
+  }
+  65% {
+    transform: scale(1.06);
+    background: linear-gradient(135deg, #34D399, #10B981) !important;
+    color: white !important;
+  }
+  100% {
+    transform: scale(1);
+    background: #10b981 !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+  }
+}
+
+.btn-gold-flash {
+  animation: goldFlashButton 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+/* Expanding Gold Shockwave Ring */
+@keyframes goldRingBurst {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 1;
+    border-width: 5px;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.5);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+.gold-flash-ring {
+  position: fixed;
+  border-radius: 50%;
+  border: 5px solid #FFD700;
+  box-shadow: 0 0 25px #FFD700, 0 0 50px #FFA500;
+  pointer-events: none;
+  z-index: 99999;
+  animation: goldRingBurst 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Floating Gold Sparkle Particles */
+@keyframes goldSparkleFloat {
+  0% {
+    transform: translate(0, 0) scale(0.2) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty)) scale(1.35) rotate(var(--rot));
+  }
+  100% {
+    transform: translate(var(--tx), calc(var(--ty) - 30px)) scale(0) rotate(calc(var(--rot) + 60deg));
+    opacity: 0;
+  }
+}
+
+.gold-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100000;
+  color: #FFD700;
+  text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500, 0 0 30px #FF8C00;
+  animation: goldSparkleFloat 0.75s ease-out forwards;
+  user-select: none;
+}
+
+/* Flying Bubble Gold Aura */
+.fly-bubble {
+  border: 3.5px solid #FFD700 !important;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.95), 0 0 50px rgba(255, 180, 0, 0.65) !important;
+}
+
+/* Cart Icon Gold Halo Flash */
+@keyframes goldCartHalo {
+  0%, 100% {
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px #FFD700) drop-shadow(0 0 25px #FFA500);
+    color: #FFD700 !important;
+    transform: scale(1.35) rotate(-6deg);
+  }
+}
+
+.cart-gold-flash {
+  animation: goldCartHalo 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+/* ================================================================
+   RESPONSIVE HELPERS
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

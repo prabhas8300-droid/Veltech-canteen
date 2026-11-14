@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_orange_juice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#271a12"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_orange_juice" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_orange_juice)"/>
+  
+      <!-- Glass -->
+      <path d="M 160,70 L 172,210 L 228,210 L 240,70 Z" fill="#ffffff" opacity="0.25" filter="url(#shadow_orange_juice)"/>
+      <!-- Orange Juice liquid -->
+      <path d="M 164,90 L 174,206 L 226,206 L 236,90 Z" fill="#f97316"/>
+      <ellipse cx="200" cy="90" rx="36" ry="10" fill="#fb923c"/>
+      <!-- Ice cubes floating -->
+      <rect x="185" y="105" width="18" height="18" rx="3" fill="#ffffff" opacity="0.5" transform="rotate(15 185 105)"/>
+      <rect x="200" y="130" width="16" height="16" rx="3" fill="#ffffff" opacity="0.4" transform="rotate(-20 200 130)"/>
+      <!-- Straw -->
+      <line x1="210" y1="40" x2="195" y2="180" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+      <line x1="210" y1="40" x2="235" y2="28" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+      <!-- Orange Slice on Rim -->
+      <circle cx="160" cy="70" r="24" fill="#ea580c" filter="url(#shadow_orange_juice)"/>
+      <circle cx="160" cy="70" r="20" fill="#fed7aa"/>
+      <circle cx="160" cy="70" r="17" fill="#f97316"/>
+      <line x1="160" y1="53" x2="160" y2="87" stroke="#fed7aa" stroke-width="1.5"/>
+      <line x1="143" y1="70" x2="177" y2="70" stroke="#fed7aa" stroke-width="1.5"/>
+    
+  <rect x="16" y="16" width="134" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#f97316" stroke-width="1.2"/>
+  <text x="83.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#f97316" text-anchor="middle" letter-spacing="0.8">DRINKS • FRESH</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Fresh Cold-Pressed Orange Juice</text>
+</svg>

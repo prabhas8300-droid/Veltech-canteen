@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_flash_cards" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#171e28"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_flash_cards" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_flash_cards)"/>
+  
+      <!-- Stack of Ruled Flash Cards on Ring -->
+      <rect x="120" y="80" width="160" height="105" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow_flash_cards)"/>
+      <circle cx="140" cy="95" r="5" fill="#0f172a"/>
+      <circle cx="140" cy="95" r="16" fill="none" stroke="#94a3b8" stroke-width="3.5"/>
+      <line x1="160" y1="110" x2="260" y2="110" stroke="#93c5fd" stroke-width="2"/>
+      <line x1="160" y1="130" x2="260" y2="130" stroke="#93c5fd" stroke-width="2"/>
+      <line x1="160" y1="150" x2="260" y2="150" stroke="#93c5fd" stroke-width="2"/>
+      <text x="210" y="105" font-family="sans-serif" font-size="9" font-weight="900" fill="#1e3a8a">FORMULA REVISION</text>
+    
+  <rect x="16" y="16" width="102" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#eab308" stroke-width="1.2"/>
+  <text x="67.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#eab308" text-anchor="middle" letter-spacing="0.8">STATIONERY</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Study Revision Index Flash Cards</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_water_bottle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10222b"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_water_bottle" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_water_bottle)"/>
+  
+      <!-- Bottle Body -->
+      <rect x="170" y="80" width="60" height="135" rx="10" fill="#38bdf8" opacity="0.3" filter="url(#shadow_water_bottle)"/>
+      <rect x="175" y="85" width="50" height="125" rx="8" fill="#e0f2fe" opacity="0.75"/>
+      <!-- Water level wave -->
+      <path d="M 175,105 Q 187,100 200,105 Q 212,110 225,105 L 225,205 L 175,205 Z" fill="#0284c7" opacity="0.35"/>
+      <!-- Bottle Neck &amp; Cap -->
+      <rect x="188" y="58" width="24" height="24" fill="#e0f2fe" opacity="0.75"/>
+      <rect x="185" y="45" width="30" height="16" rx="3" fill="#0284c7" filter="url(#shadow_water_bottle)"/>
+      <!-- Blue Branded Label -->
+      <rect x="170" y="125" width="60" height="45" fill="#0284c7"/>
+      <rect x="170" y="127" width="60" height="41" fill="#0369a1"/>
+      <text x="200" y="148" font-family="sans-serif" font-size="9" font-weight="900" fill="#ffffff" text-anchor="middle">MINERAL</text>
+      <text x="200" y="159" font-family="sans-serif" font-size="7.5" font-weight="700" fill="#bae6fd" text-anchor="middle">WATER 1L</text>
+      <!-- Water drops -->
+      <circle cx="182" cy="180" r="2" fill="#ffffff" opacity="0.8"/>
+      <circle cx="218" cy="190" r="2.5" fill="#ffffff" opacity="0.8"/>
+    
+  <rect x="16" y="16" width="150" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#0ea5e9" stroke-width="1.2"/>
+  <text x="91.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#0ea5e9" text-anchor="middle" letter-spacing="0.8">DRINKS • CHILLED</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Mineral Water Bottle (1 Litre)</text>
+</svg>

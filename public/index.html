@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Annapurna Canteen - Vel Tech | Fresh Food, Happy Moments!</title>
+  <meta name="description" content="Vel Tech Annapurna Canteen - Fresh, hygienic, and affordable campus dining for students and faculty." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --primary: #FF6B35;
+      --primary-dark: #E85D04;
+      --green: #2D6A4F;
+      --green-light: #52B788;
+      --cream: #FFF8F0;
+      --cream-light: #FFFDF9;
+      --white: #FFFFFF;
+      --text-dark: #1A1A2E;
+      --text-gray: #6B7280;
+      --border: #E5E7EB;
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --radius-xl: 24px;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background-color: #1A1A2E;
+      background-image: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1600&q=80');
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      position: relative;
+      transition: background-image 0.5s ease;
+    }
+
+    /* Ambient Warm Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.82) 0%, rgba(232, 93, 4, 0.45) 50%, rgba(45, 106, 79, 0.4) 100%);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 0;
+    }
+
+    .main-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+    }
+
+    /* College & Canteen Header */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    .college-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.35rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #FFD166;
+      margin-bottom: 0.6rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .canteen-title-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .brand-icon-circle {
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: 3px solid rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+      animation: floatPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes floatPulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .canteen-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+      line-height: 1.1;
+    }
+
+    .tagline-pill {
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #FFF8F0;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .tagline-pill span {
+      color: #52B788;
+      font-weight: 700;
+    }
+
+    /* Glass Login Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: var(--radius-xl);
+      padding: 2.2rem 2rem;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s ease;
+    }
+
+    /* Tabs */
+    .auth-tabs {
+      display: flex;
+      background: #F3F4F6;
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 1.6rem;
+      border: 1px solid var(--border);
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      padding: 0.65rem;
+      border: none;
+      background: transparent;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-gray);
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .auth-tab-btn.active {
+      background: var(--white);
+      color: var(--primary);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      margin-bottom: 1.4rem;
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 1.05rem;
+      position: relative;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      color: var(--text-gray);
+      font-size: 0.92rem;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.6rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      transition: all 0.25s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3.5px rgba(255, 107, 53, 0.15);
+    }
+
+    .form-input:focus + .input-icon {
+      color: var(--primary);
+    }
+
+    .form-input.is-error {
+      border-color: #EF4444;
+      background: #FFF5F5;
+    }
+
+    .pw-toggle-btn {
+      position: absolute;
+      right: 0.85rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      padding: 0.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pw-toggle-btn:hover {
+      color: var(--text-dark);
+    }
+
+    .field-error-msg {
+      font-size: 0.72rem;
+      color: #DC2626;
+      margin-top: 0.3rem;
+      display: none;
+      font-weight: 500;
+    }
+
+    .field-error-msg.visible {
+      display: block;
+    }
+
+    /* Forgot link */
+    .forgot-link-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .forgot-link-btn:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.35);
+      margin-top: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.45);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Alerts */
+    .alert-box {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      margin-bottom: 1.1rem;
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .alert-box.visible {
+      display: flex;
+    }
+
+    .alert-box.error {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #FECACA;
+    }
+
+    .alert-box.success {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+    }
+
+    /* Demo Helper */
+    .demo-credentials-card {
+      margin-top: 1.2rem;
+      padding: 0.85rem 1rem;
+      background: #FFF8F0;
+      border: 1px dashed #FFD8BE;
+      border-radius: 12px;
+      font-size: 0.76rem;
+      color: #9A3412;
+    }
+
+    .demo-credentials-card .demo-title {
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--primary-dark);
+      font-size: 0.8rem;
+    }
+
+    .demo-item {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.2rem;
+      padding: 0.2rem 0;
+    }
+
+    .demo-quick-fill {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Bottom portal links */
+    .footer-links-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.2rem;
+      padding: 0 0.5rem;
+    }
+
+    .portal-link {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .portal-link:hover {
+      color: #FFD166;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 46, 0.75);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-dialog {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.92);
+      transition: all 0.3s ease;
+    }
+
+    .modal-backdrop.open .modal-dialog {
+      transform: scale(1);
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .modal-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-gray);
+      line-height: 1;
+    }
+
+    /* Toast */
+    .toast-container {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .toast-item {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 0.85rem 1.2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      min-width: 280px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      border-left: 4px solid var(--primary);
+      animation: slideInToast 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-item.success { border-left-color: var(--green-light); }
+    .toast-item.error { border-left-color: #EF4444; }
+
+    @keyframes slideInToast {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .glass-card { padding: 1.6rem 1.4rem; border-radius: 20px; }
+      .canteen-name { font-size: 2.2rem; }
+      .brand-icon-circle { width: 48px; height: 48px; font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="main-container">
+    <!-- College & Canteen Header -->
+    <header class="brand-header">
+      <div class="college-badge">
+        <i class="fas fa-university"></i> Vel Tech
+      </div>
+      <div class="canteen-title-wrap">
+        <div class="brand-icon-circle">🍲</div>
+        <h1 class="canteen-name">Annapurna</h1>
+      </div>
+      <div class="tagline-pill">
+        Fresh Food, <span>Happy Moments!</span>
+      </div>
+    </header>
+
+    <!-- Center Login / Signup Glass Card -->
+    <div class="glass-card">
+      <!-- Tab Navigation -->
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="loginTabBtn" onclick="switchAuthTab('login')">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <button type="button" class="auth-tab-btn" id="signupTabBtn" onclick="switchAuthTab('signup')">
+          <i class="fas fa-user-plus"></i> Sign Up
+        </button>
+      </div>
+
+      <!-- ================= LOGIN FORM ================= -->
+      <div id="loginFormSection">
+        <div class="card-title">Welcome Back! 👋</div>
+        <div class="card-subtitle">Sign in to order fresh food from Annapurna Canteen</div>
+
+        <div class="alert-box error" id="loginAlert">
+          <i class="fas fa-exclamation-circle"></i>
+          <span class="alert-msg"></span>
+        </div>
+
+        <form id="loginForm" onsubmit="handleLoginSubmit(event)" novalidate>
+          <!-- Email ID -->
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email ID</label>
+            <div class="input-wrapper">
+              <input type="email" class="form-input" id="loginEmail" placeholder="student@veltech.edu" required />
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+            <div class="field-error-msg" id="loginEmailErr">Please enter a valid email address.</div>
+          </div>
+
+          <!-- Mobile Number -->
+          <div class="form-group">
+            <label class="form-label" for="loginMobile">Mobile Number</label>
+            <div class="input-wrapper">
+              <input type="tel" class="form-input" id="loginMobile" placeholder="10-digit mobile number" maxlength="10" required />
+              <i class="fas fa-phone-alt input-icon"></i>
+            </div>
+            <div class="field-error-msg" id="loginMobileErr">Please enter a valid 10-digit mobile number.</div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <div class="form-label">
+              <span>Password</span>
+              <button type="button" class="forgot-link-btn" onclick="openForgotModal()">Forgot Password?</button>
+            </div>
+            <div class="input-wrapper">
+              <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required />
+              <i class="fas fa-lock input-icon"></i>
+              <button type="button" class="pw-toggle-btn" onclick="togglePwVisibility('loginPassword', this)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="field-error-msg" id="loginPwErr">Password is required (min 6 characters).</div>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" class="btn-submit" id="loginBtn">
+            <i class="fas fa-arrow-right"></i> Login to Canteen
+          </button>
+        </form>
+
+        <!-- Quick Demo Accounts -->
+        <div class="demo-credentials-card">
+          <div class="demo-title"><i class="fas fa-key"></i> Quick Demo Accounts</div>
+          <div class="demo-item">
+            <span><strong>Student:</strong> student@veltech.edu (9000000001)</span>
+            <span class="demo-quick-fill" onclick="fillDemo('student@veltech.edu', '9000000001', 'Student@123')">Fill</span>
+          </div>
+          <div class="demo-item">
+            <span><strong>Admin:</strong> admin@veltech.edu (9000000000)</span>
+            <span class="demo-quick-fill" onclick="fillDemo('admin@veltech.edu', '9000000000', 'Admin@123')">Fill</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SIGN UP FORM ================= -->
+      <div id="signupFormSection" style="display: none;">
+        <div class="card-title">Join Annapurna 🎓</div>
+        <div class="card-subtitle">Create a student account to order food in seconds</div>
+
+        <div class="alert-box error" id="signupAlert">
+          <i class="fas fa-exclamation-circle"></i>
+          <span class="alert-msg"></span>
+        </div>
+
+        <form id="signupForm" onsubmit="handleSignupSubmit(event)" novalidate>
+          <!-- Full Name -->
+          <div class="form-group">
+            <label class="form-label" for="signupName">Full Name</label>
+            <div class="input-wrapper">
+              <input type="text" class="form-input" id="signupName" placeholder="Enter your full name" required />
+              <i class="fas fa-user input-icon"></i>
+            </div>
+            <div class="field-error-msg" id="signupNameErr">Full name is required.</div>
+          </div>
+
+          <!-- Email ID -->
+          <div class="form-group">
+            <label class="form-label" for="signupEmail">Email ID</label>
+            <div class="input-wrapper">
+              <input type="email" class="form-input" id="signupEmail" placeholder="you@veltech.edu" required />
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+            <div class="field-error-msg" id="signupEmailErr">Enter a valid email address.</div>
+          </div>
+
+          <!-- Mobile Number -->
+          <div class="form-group">
+            <label class="form-label" for="signupMobile">Mobile Number</label>
+            <div class="input-wrapper">
+              <input type="tel" class="form-input" id="signupMobile" placeholder="10-digit mobile number" maxlength="10" required />
+              <i class="fas fa-phone-alt input-icon"></i>
+            </div>
+            <div class="field-error-msg" id="signupMobileErr">Enter a valid 10-digit mobile number.</div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label" for="signupPassword">Password</label>
+            <div class="input-wrapper">
+              <input type="password" class="form-input" id="signupPassword" placeholder="Min 8 characters with 1 number" required />
+              <i class="fas fa-lock input-icon"></i>
+              <button type="button" class="pw-toggle-btn" onclick="togglePwVisibility('signupPassword', this)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="field-error-msg" id="signupPwErr">Min 8 characters with at least 1 number.</div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <label class="form-label" for="signupConfirm">Confirm Password</label>
+            <div class="input-wrapper">
+              <input type="password" class="form-input" id="signupConfirm" placeholder="Re-enter your password" required />
+              <i class="fas fa-shield-alt input-icon"></i>
+              <button type="button" class="pw-toggle-btn" onclick="togglePwVisibility('signupConfirm', this)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="field-error-msg" id="signupConfirmErr">Passwords do not match.</div>
+          </div>
+
+          <!-- Register Button -->
+          <button type="submit" class="btn-submit" id="signupBtn">
+            <i class="fas fa-user-check"></i> Register Account
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="footer-links-wrap" style="flex-direction:column;gap:0.75rem;text-align:center;">
+      <a href="/home.html" class="portal-link" style="color:#FFD166;font-weight:700;font-size:0.95rem;background:rgba(255,255,255,0.15);padding:0.5rem 1.2rem;border-radius:50px;border:1px solid rgba(255,255,255,0.3);width:100%;justify-content:center;">
+        <i class="fas fa-utensils"></i> Browse Food Menu & Mini Store Directly ➔
+      </a>
+      <div style="display:flex;justify-content:space-between;width:100%;">
+        <a href="/admin/login.html" class="portal-link">
+          <i class="fas fa-user-shield"></i> Admin Portal
+        </a>
+        <a href="/about.html" class="portal-link">
+          <i class="fas fa-info-circle"></i> About Vel Tech Canteen
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal-backdrop" id="forgotModal">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <div class="modal-heading"><i class="fas fa-key" style="color:var(--primary);margin-right:6px;"></i> Reset Password</div>
+        <button class="modal-close-btn" onclick="closeForgotModal()">&times;</button>
+      </div>
+      <p style="font-size:0.85rem;color:var(--text-gray);margin-bottom:1.2rem;">
+        Enter your registered email address and we will provide a password reset link.
+      </p>
+      <div class="alert-box success" id="forgotAlertSuccess">
+        <i class="fas fa-check-circle"></i>
+        <span class="alert-msg"></span>
+      </div>
+      <div class="alert-box error" id="forgotAlertError">
+        <i class="fas fa-exclamation-circle"></i>
+        <span class="alert-msg"></span>
+      </div>
+      <form onsubmit="handleForgotSubmit(event)">
+        <div class="form-group">
+          <label class="form-label" for="forgotEmail">Email ID</label>
+          <div class="input-wrapper">
+            <input type="email" class="form-input" id="forgotEmail" placeholder="your registered email" required />
+            <i class="fas fa-envelope input-icon"></i>
+          </div>
+        </div>
+        <button type="submit" class="btn-submit" id="forgotBtn">
+          <i class="fas fa-paper-plane"></i> Send Reset Link
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // ---------------------------------------------------------
+    // Dynamic Background Image Loader from Admin Settings
+    // ---------------------------------------------------------
+    async function loadLandingBackground() {
+      try {
+        const res = await fetch('/api/settings');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.settings && data.settings.background_image) {
+            document.body.style.backgroundImage = `url('${data.settings.background_image}')`;
+          }
+        }
+      } catch (e) {
+        console.log('Using default background');
+      }
+    }
+
+    // Auto-redirect if already authenticated
+    (function checkExistingSession() {
+      const token = localStorage.getItem('annapurna_token');
+      const userStr = localStorage.getItem('annapurna_user');
+      if (token && userStr) {
+        try {
+          const u = JSON.parse(userStr);
+          if (u.role === 'admin') window.location.href = '/admin/dashboard.html';
+          else window.location.href = '/home.html';
+        } catch {}
+      }
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadLandingBackground();
+    });
+
+    // Tab switcher
+    function switchAuthTab(tab) {
+      const loginSection = document.getElementById('loginFormSection');
+      const signupSection = document.getElementById('signupFormSection');
+      const loginTabBtn = document.getElementById('loginTabBtn');
+      const signupTabBtn = document.getElementById('signupTabBtn');
+
+      if (tab === 'login') {
+        loginTabBtn.classList.add('active');
+        signupTabBtn.classList.remove('active');
+        loginSection.style.display = 'block';
+        signupSection.style.display = 'none';
+      } else {
+        signupTabBtn.classList.add('active');
+        loginTabBtn.classList.remove('active');
+        signupSection.style.display = 'block';
+        loginSection.style.display = 'none';
+      }
+    }
+
+    // Password visibility toggle
+    function togglePwVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      const icon = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'fas fa-eye';
+      }
+    }
+
+    // Quick Fill Demo
+    function fillDemo(email, mobile, pw) {
+      document.getElementById('loginEmail').value = email;
+      document.getElementById('loginMobile').value = mobile;
+      document.getElementById('loginPassword').value = pw;
+      clearFormErrors(['loginEmailErr', 'loginMobileErr', 'loginPwErr']);
+      showToast('Demo credentials loaded!', 'info');
+    }
+
+    // Alerts and Errors Helpers
+    function setAlert(alertId, message, isSuccess = false) {
+      const el = document.getElementById(alertId);
+      if (!el) return;
+      el.querySelector('.alert-msg').textContent = message;
+      el.className = `alert-box visible ${isSuccess ? 'success' : 'error'}`;
+    }
+
+    function clearAlert(alertId) {
+      const el = document.getElementById(alertId);
+      if (el) el.classList.remove('visible');
+    }
+
+    function setFieldError(errId, inputId, message) {
+      const errEl = document.getElementById(errId);
+      const inputEl = document.getElementById(inputId);
+      if (errEl) {
+        errEl.textContent = message;
+        errEl.classList.add('visible');
+      }
+      if (inputEl) inputEl.classList.add('is-error');
+    }
+
+    function clearFieldError(errId, inputId) {
+      const errEl = document.getElementById(errId);
+      const inputEl = document.getElementById(inputId);
+      if (errEl) errEl.classList.remove('visible');
+      if (inputEl) inputEl.classList.remove('is-error');
+    }
+
+    function clearFormErrors(errIds) {
+      errIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('visible');
+      });
+      document.querySelectorAll('.form-input').forEach(i => i.classList.remove('is-error'));
+    }
+
+    // Toast
+    function showToast(msg, type = 'info') {
+      const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+      const container = document.getElementById('toastContainer');
+      const item = document.createElement('div');
+      item.className = `toast-item ${type}`;
+      item.innerHTML = `<span>${icons[type] || 'ℹ️'}</span><span>${msg}</span>`;
+      container.appendChild(item);
+      setTimeout(() => item.remove(), 3500);
+    }
+
+    // =========================================================
+    // Handle Login with Email, Mobile & Password Validation
+    // =========================================================
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      clearAlert('loginAlert');
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const mobile = document.getElementById('loginMobile').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginBtn');
+
+      let isValid = true;
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        setFieldError('loginEmailErr', 'loginEmail', 'Please enter a valid email address.');
+        isValid = false;
+      } else {
+        clearFieldError('loginEmailErr', 'loginEmail');
+      }
+
+      // Mobile validation
+      const mobileRegex = /^[0-9]{10}$/;
+      if (!mobile || !mobileRegex.test(mobile)) {
+        setFieldError('loginMobileErr', 'loginMobile', 'Please enter a valid 10-digit mobile number.');
+        isValid = false;
+      } else {
+        clearFieldError('loginMobileErr', 'loginMobile');
+      }
+
+      // Password validation
+      if (!password || password.length < 6) {
+        setFieldError('loginPwErr', 'loginPassword', 'Please enter your password.');
+        isValid = false;
+      } else {
+        clearFieldError('loginPwErr', 'loginPassword');
+      }
+
+      if (!isValid) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, mobile, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          localStorage.setItem('annapurna_token', data.token);
+          localStorage.setItem('annapurna_user', JSON.stringify(data.user));
+          showToast(`Welcome back, ${data.user.name}! 🍲`, 'success');
+
+          setTimeout(() => {
+            if (data.user.role === 'admin') {
+              window.location.href = '/admin/dashboard.html';
+            } else {
+              window.location.href = '/home.html';
+            }
+          }, 700);
+        } else {
+          setAlert('loginAlert', data.message || 'Login failed. Please verify credentials.');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-arrow-right"></i> Login to Canteen';
+        }
+      } catch (err) {
+        setAlert('loginAlert', 'Cannot reach canteen server. Make sure the backend is running.');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-arrow-right"></i> Login to Canteen';
+      }
+    }
+
+    // =========================================================
+    // Handle Signup with Validation
+    // =========================================================
+    async function handleSignupSubmit(e) {
+      e.preventDefault();
+      clearAlert('signupAlert');
+
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const mobile = document.getElementById('signupMobile').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const confirm = document.getElementById('signupConfirm').value;
+      const btn = document.getElementById('signupBtn');
+
+      let isValid = true;
+
+      // Name
+      if (!name || name.length < 2) {
+        setFieldError('signupNameErr', 'signupName', 'Please enter your full name.');
+        isValid = false;
+      } else {
+        clearFieldError('signupNameErr', 'signupName');
+      }
+
+      // Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        setFieldError('signupEmailErr', 'signupEmail', 'Enter a valid email address.');
+        isValid = false;
+      } else {
+        clearFieldError('signupEmailErr', 'signupEmail');
+      }
+
+      // Mobile
+      const mobileRegex = /^[0-9]{10}$/;
+      if (!mobile || !mobileRegex.test(mobile)) {
+        setFieldError('signupMobileErr', 'signupMobile', 'Enter a 10-digit mobile number.');
+        isValid = false;
+      } else {
+        clearFieldError('signupMobileErr', 'signupMobile');
+      }
+
+      // Password
+      if (password.length < 8 || !/\d/.test(password)) {
+        setFieldError('signupPwErr', 'signupPassword', 'Must be at least 8 characters with a number.');
+        isValid = false;
+      } else {
+        clearFieldError('signupPwErr', 'signupPassword');
+      }
+
+      // Confirm Password
+      if (password !== confirm) {
+        setFieldError('signupConfirmErr', 'signupConfirm', 'Passwords do not match.');
+        isValid = false;
+      } else {
+        clearFieldError('signupConfirmErr', 'signupConfirm');
+      }
+
+      if (!isValid) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, mobile, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          localStorage.setItem('annapurna_token', data.token);
+          localStorage.setItem('annapurna_user', JSON.stringify(data.user));
+          showToast('Account created successfully! Welcome 🎉', 'success');
+          setTimeout(() => {
+            window.location.href = '/home.html';
+          }, 800);
+        } else {
+          setAlert('signupAlert', data.message || 'Registration failed.');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-user-check"></i> Register Account';
+        }
+      } catch (err) {
+        setAlert('signupAlert', 'Cannot reach canteen server.');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-user-check"></i> Register Account';
+      }
+    }
+
+    // =========================================================
+    // Forgot Password Modal Handlers
+    // =========================================================
+    function openForgotModal() {
+      document.getElementById('forgotModal').classList.add('open');
+      clearAlert('forgotAlertSuccess');
+      clearAlert('forgotAlertError');
+    }
+
+    function closeForgotModal() {
+      document.getElementById('forgotModal').classList.remove('open');
+    }
+
+    async function handleForgotSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('forgotEmail').value.trim();
+      const btn = document.getElementById('forgotBtn');
+      clearAlert('forgotAlertSuccess');
+      clearAlert('forgotAlertError');
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+      try {
+        const res = await fetch('/api/auth/forgot-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (data.success) {
+          setAlert('forgotAlertSuccess', data.message || 'Reset link sent!', true);
+        } else {
+          setAlert('forgotAlertError', data.message || 'Failed to send reset link.');
+        }
+      } catch (e) {
+        setAlert('forgotAlertError', 'Network error.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Reset Link';
+      }
+    }
+
+    document.getElementById('forgotModal').addEventListener('click', function(e) {
+      if (e.target === this) closeForgotModal();
+    });
+  </script>
+</body>
+</html>

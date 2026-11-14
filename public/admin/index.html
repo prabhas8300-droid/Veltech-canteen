@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Redirect</title>
+  <script>
+    const token = localStorage.getItem('annapurna_token');
+    const userStr = localStorage.getItem('annapurna_user');
+    let isAdmin = false;
+    if (token && userStr) {
+      try {
+        const u = JSON.parse(userStr);
+        if (u.role === 'admin') isAdmin = true;
+      } catch (e) {}
+    }
+    if (isAdmin) {
+      window.location.replace('/admin/dashboard.html');
+    } else {
+      window.location.replace('/admin/login.html');
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_crispy_dosa" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#271c12"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_crispy_dosa" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_crispy_dosa)"/>
+  
+      <rect x="40" y="55" width="320" height="150" rx="20" fill="#27272a" filter="url(#shadow_crispy_dosa)"/>
+      <path d="M 70,125 C 100,80 300,75 330,125 C 320,165 100,170 70,125 Z" fill="#d97706" filter="url(#shadow_crispy_dosa)"/>
+      <path d="M 75,125 C 100,90 295,85 325,125 C 315,155 105,160 75,125 Z" fill="#f59e0b"/>
+      <path d="M 85,123 Q 200,105 315,123" stroke="#b45309" stroke-width="6" fill="none" opacity="0.7"/>
+      <path d="M 90,127 Q 200,140 310,127" stroke="#92400e" stroke-width="4" fill="none" opacity="0.5"/>
+      <circle cx="120" cy="175" r="24" fill="#374151" filter="url(#shadow_crispy_dosa)"/>
+      <circle cx="120" cy="175" r="21" fill="#f8fafc"/>
+      <circle cx="200" cy="175" r="24" fill="#374151" filter="url(#shadow_crispy_dosa)"/>
+      <circle cx="200" cy="175" r="21" fill="#dc2626"/>
+      <circle cx="280" cy="175" r="24" fill="#374151" filter="url(#shadow_crispy_dosa)"/>
+      <circle cx="280" cy="175" r="21" fill="#d97706"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">TIFFIN • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Golden Crispy Dosa Roast</text>
+</svg>

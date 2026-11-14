@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_dairy_milk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f162e"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_dairy_milk" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_dairy_milk)"/>
+  
+      <!-- Iconic Purple Bar -->
+      <rect x="130" y="60" width="140" height="145" rx="8" fill="#4c1d95" filter="url(#shadow_dairy_milk)"/>
+      <rect x="135" y="65" width="130" height="135" rx="6" fill="#5b21b6"/>
+      <!-- Gold Foil peek on top -->
+      <path d="M 135,65 L 265,65 L 265,90 L 135,80 Z" fill="#f59e0b"/>
+      <path d="M 135,65 L 265,65 L 265,86 L 135,78 Z" fill="#fef08a"/>
+      <!-- Embossed Chocolate Chunks in foil -->
+      <rect x="160" y="68" width="35" height="20" rx="3" fill="#451a03"/>
+      <rect x="205" y="68" width="35" height="20" rx="3" fill="#451a03"/>
+      <!-- Cadbury Script Logo -->
+      <text x="200" y="125" font-family="'Brush Script MT', cursive, sans-serif" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle">Cadbury</text>
+      <!-- Dairy Milk Gold Text -->
+      <text x="200" y="148" font-family="sans-serif" font-size="13" font-weight="900" fill="#fef08a" text-anchor="middle" letter-spacing="1">DAIRY MILK</text>
+      <!-- Glass and a half milk splash icon -->
+      <circle cx="185" cy="172" r="7" fill="#ffffff"/>
+      <circle cx="215" cy="172" r="7" fill="#ffffff"/>
+    
+  <rect x="16" y="16" width="94" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#a855f7" stroke-width="1.2"/>
+  <text x="63.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#a855f7" text-anchor="middle" letter-spacing="0.8">CHOCOLATE</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Cadbury Dairy Milk Chocolate</text>
+</svg>

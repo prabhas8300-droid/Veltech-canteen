@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_ring_binder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151e2c"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_ring_binder" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_ring_binder)"/>
+  
+      <rect x="120" y="45" width="160" height="175" rx="6" fill="#1e40af" filter="url(#shadow_ring_binder)"/>
+      <rect x="125" y="50" width="150" height="165" rx="4" fill="#2563eb"/>
+      <!-- 2 Steel D-Rings -->
+      <circle cx="140" cy="100" r="12" fill="none" stroke="#cbd5e1" stroke-width="5"/>
+      <circle cx="140" cy="165" r="12" fill="none" stroke="#cbd5e1" stroke-width="5"/>
+      <!-- Spine Label Pocket -->
+      <rect x="155" y="70" width="95" height="40" rx="3" fill="#ffffff"/>
+      <text x="202" y="94" font-family="sans-serif" font-size="9" font-weight="900" fill="#1e3a8a" text-anchor="middle">A4 2-D RING</text>
+      <text x="202" y="105" font-family="sans-serif" font-size="7.5" font-weight="700" fill="#64748b" text-anchor="middle">DOCUMENT BINDER</text>
+    
+  <rect x="16" y="16" width="62" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#0ea5e9" stroke-width="1.2"/>
+  <text x="47.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#0ea5e9" text-anchor="middle" letter-spacing="0.8">FILES</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">A4 Ring Binder Document File</text>
+</svg>

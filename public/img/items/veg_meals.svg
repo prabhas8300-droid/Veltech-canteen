@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_veg_meals" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#152416"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_veg_meals" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_veg_meals)"/>
+  
+      <rect x="35" y="45" width="330" height="175" rx="20" fill="#2e7d32" filter="url(#shadow_veg_meals)"/>
+      <path d="M 40,132 L 360,132" stroke="#4caf50" stroke-width="2.5" opacity="0.6"/>
+      <!-- Steamed Rice Mount -->
+      <ellipse cx="200" cy="145" rx="55" ry="32" fill="#ffffff" filter="url(#shadow_veg_meals)"/>
+      <ellipse cx="200" cy="140" rx="35" ry="18" fill="#fef08a" opacity="0.9"/>
+      <!-- Sambar on top of rice -->
+      <circle cx="200" cy="138" r="12" fill="#d97706"/>
+      <!-- Top Row Bowls -->
+      <circle cx="80" cy="85" r="18" fill="#f59e0b"/>
+      <circle cx="130" cy="80" r="18" fill="#ef4444"/>
+      <circle cx="180" cy="78" r="18" fill="#84cc16"/>
+      <circle cx="230" cy="78" r="18" fill="#d97706"/>
+      <circle cx="280" cy="80" r="18" fill="#f8fafc"/>
+      <circle cx="325" cy="85" r="16" fill="#fbbf24"/>
+      <!-- Appalam Crispy Papad -->
+      <circle cx="100" cy="155" r="28" fill="#fef08a" filter="url(#shadow_veg_meals)"/>
+      <circle cx="98" cy="153" r="25" fill="#fef9c3"/>
+      <!-- Payasam / Sweet bowl -->
+      <circle cx="310" cy="155" r="22" fill="#fbbf24" filter="url(#shadow_veg_meals)"/>
+    
+  <rect x="16" y="16" width="110" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="71.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">LUNCH • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">South Indian Veg Banana Leaf Meals</text>
+</svg>

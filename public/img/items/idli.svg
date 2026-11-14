@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_idli" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a2e1d"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_idli" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_idli)"/>
+  
+      <path d="M 45,130 C 55,60 120,40 220,45 C 330,50 365,100 355,170 C 345,225 280,235 180,230 C 90,225 40,190 45,130 Z" fill="#2e7d32" filter="url(#shadow_idli)"/>
+      <path d="M 55,135 Q 200,138 345,140" stroke="#4caf50" stroke-width="2.5" fill="none" opacity="0.5"/>
+      <circle cx="110" cy="95" r="32" fill="#374151" filter="url(#shadow_idli)"/>
+      <circle cx="110" cy="95" r="28" fill="#d97706"/>
+      <circle cx="114" cy="92" r="5" fill="#ef4444" opacity="0.9"/>
+      <circle cx="290" cy="95" r="30" fill="#374151" filter="url(#shadow_idli)"/>
+      <circle cx="290" cy="95" r="26" fill="#f8fafc"/>
+      <circle cx="288" cy="93" r="2.5" fill="#1e293b"/>
+      <ellipse cx="160" cy="155" rx="50" ry="38" fill="#ffffff" filter="url(#shadow_idli)"/>
+      <ellipse cx="152" cy="148" rx="38" ry="26" fill="#f4f4f5" opacity="0.8"/>
+      <ellipse cx="235" cy="160" rx="52" ry="39" fill="#ffffff" filter="url(#shadow_idli)"/>
+      <ellipse cx="227" cy="152" rx="40" ry="27" fill="#f4f4f5" opacity="0.8"/>
+      <path d="M 195,145 Q 200,135 208,138 Q 202,148 195,145 Z" fill="#15803d"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">TIFFIN • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Idli (2 pcs) with Sambar &amp; Chutney</text>
+</svg>

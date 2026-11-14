@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_sticky_notes" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#262214"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_sticky_notes" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_sticky_notes)"/>
+  
+      <!-- Square Post-it Sticky Pad -->
+      <rect x="135" y="70" width="130" height="130" rx="4" fill="#ca8a04" filter="url(#shadow_sticky_notes)"/>
+      <rect x="135" y="66" width="130" height="130" rx="4" fill="#fef08a"/>
+      <rect x="135" y="66" width="130" height="24" fill="#fde047" opacity="0.6"/>
+      <!-- Peeling bottom corner -->
+      <path d="M 235,196 L 265,166 L 235,166 Z" fill="#eab308"/>
+      <text x="200" y="125" font-family="'Comic Sans MS', cursive, sans-serif" font-size="12" font-weight="700" fill="#78350f" text-anchor="middle">Sticky Notes</text>
+      <text x="200" y="145" font-family="sans-serif" font-size="8" font-weight="700" fill="#a16207" text-anchor="middle">100 SHEETS • 3x3 INCH</text>
+    
+  <rect x="16" y="16" width="102" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#eab308" stroke-width="1.2"/>
+  <text x="67.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#eab308" text-anchor="middle" letter-spacing="0.8">STATIONERY</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Canary Yellow Self-Adhesive Sticky Notes</text>
+</svg>

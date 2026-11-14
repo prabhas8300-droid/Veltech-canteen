@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal - Annapurna Canteen | Vel Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #FF6B35;
+      --primary-dark: #E85D04;
+      --dark: #0F172A;
+      --slate: #1E293B;
+      --border: #334155;
+      --text-gray: #94A3B8;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 0%, #1E293B 0%, #0F172A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      color: white;
+    }
+    .admin-card {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2.4rem 2.2rem;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+    .admin-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .admin-shield {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+      margin-bottom: 1rem;
+    }
+    .admin-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+    .admin-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      margin-top: 0.2rem;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #E2E8F0;
+      margin-bottom: 0.4rem;
+    }
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-gray);
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.6rem;
+      background: #0F172A;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      color: white;
+      font-size: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.25s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+    }
+    .btn-login {
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.25s;
+      margin-top: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.35);
+    }
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 107, 53, 0.5);
+    }
+    .alert-error {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #FCA5A5;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      margin-bottom: 1.2rem;
+      display: none;
+    }
+    .alert-error.show { display: block; }
+    .demo-hint {
+      margin-top: 1.4rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      font-size: 0.78rem;
+      color: var(--text-gray);
+      text-align: center;
+    }
+    .demo-hint strong { color: #F8FAFC; }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 1.2rem;
+      color: var(--text-gray);
+      font-size: 0.82rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: white; }
+  </style>
+</head>
+<body>
+  <div class="admin-card">
+    <div class="admin-header">
+      <div class="admin-shield"><i class="fas fa-shield-alt"></i></div>
+      <h1 class="admin-title">Admin Console</h1>
+      <p class="admin-subtitle">Vel Tech Annapurna Canteen Management</p>
+    </div>
+
+    <div class="alert-error" id="loginAlert"></div>
+
+    <form onsubmit="handleAdminLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Admin Email</label>
+        <div class="input-wrap">
+          <i class="fas fa-envelope"></i>
+          <input type="email" class="form-input" id="adminEmail" value="admin@veltech.edu" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input type="password" class="form-input" id="adminPw" value="Admin@123" required />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-login" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> Access Dashboard
+      </button>
+    </form>
+
+    <div class="demo-hint">
+      <strong>Default Admin Credentials:</strong><br />
+      admin@veltech.edu / Admin@123
+    </div>
+
+    <a href="/index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Return to Student Canteen
+    </a>
+  </div>
+
+  <script>
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPw').value;
+      const alertEl = document.getElementById('loginAlert');
+      const btn = document.getElementById('loginBtn');
+
+      alertEl.classList.remove('show');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (data.success && data.user.role === 'admin') {
+          localStorage.setItem('annapurna_token', data.token);
+          localStorage.setItem('annapurna_user', JSON.stringify(data.user));
+          window.location.href = '/admin/dashboard.html';
+        } else {
+          alertEl.textContent = data.user && data.user.role !== 'admin'
+            ? 'Access denied. Account does not have admin permissions.'
+            : (data.message || 'Invalid admin credentials.');
+          alertEl.classList.add('show');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Access Dashboard';
+        }
+      } catch (err) {
+        alertEl.textContent = 'Cannot reach canteen server.';
+        alertEl.classList.add('show');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Access Dashboard';
+      }
+    }
+  </script>
+</body>
+</html>

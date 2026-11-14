@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_set_squares" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b1b2a"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_set_squares" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_set_squares)"/>
+  
+      <!-- 45-degree triangle -->
+      <polygon points="80,185 200,185 80,65" fill="#38bdf8" opacity="0.65" stroke="#0284c7" stroke-width="2" filter="url(#shadow_set_squares)"/>
+      <polygon points="100,170 170,170 100,100" fill="#18181b"/>
+      <!-- 30/60 degree triangle -->
+      <polygon points="190,185 320,185 190,45" fill="#a855f7" opacity="0.65" stroke="#7e22ce" stroke-width="2" filter="url(#shadow_set_squares)"/>
+      <polygon points="210,165 290,165 210,80" fill="#18181b"/>
+    
+  <rect x="16" y="16" width="70" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#8b5cf6" stroke-width="1.2"/>
+  <text x="51.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#8b5cf6" text-anchor="middle" letter-spacing="0.8">RULERS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Technical Drafting Set Squares (Pair)</text>
+</svg>

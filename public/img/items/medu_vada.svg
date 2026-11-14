@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_medu_vada" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1c14"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_medu_vada" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_medu_vada)"/>
+  
+      <path d="M 50,130 C 50,70 120,50 200,52 C 280,50 350,70 350,130 C 350,190 280,210 200,208 C 120,210 50,190 50,130 Z" fill="#15803d" opacity="0.4"/>
+      <!-- Vada 1 -->
+      <circle cx="145" cy="140" r="52" fill="#92400e" filter="url(#shadow_medu_vada)"/>
+      <circle cx="145" cy="138" r="48" fill="#d97706"/>
+      <circle cx="142" cy="134" r="38" fill="#f59e0b" opacity="0.7"/>
+      <circle cx="145" cy="138" r="16" fill="#18181b"/>
+      <circle cx="130" cy="125" r="2" fill="#1c1917"/>
+      <circle cx="160" cy="150" r="2.5" fill="#1c1917"/>
+      <!-- Vada 2 -->
+      <circle cx="250" cy="140" r="52" fill="#92400e" filter="url(#shadow_medu_vada)"/>
+      <circle cx="250" cy="138" r="48" fill="#d97706"/>
+      <circle cx="247" cy="134" r="38" fill="#f59e0b" opacity="0.7"/>
+      <circle cx="250" cy="138" r="16" fill="#18181b"/>
+      <circle cx="235" cy="125" r="2" fill="#1c1917"/>
+      <circle cx="265" cy="150" r="2.5" fill="#1c1917"/>
+      <!-- Coconut chutney in center -->
+      <circle cx="200" cy="85" r="26" fill="#374151" filter="url(#shadow_medu_vada)"/>
+      <circle cx="200" cy="85" r="23" fill="#f8fafc"/>
+      <circle cx="198" cy="83" r="2.5" fill="#1e293b"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">TIFFIN • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Crispy Medu Vada (2 pcs)</text>
+</svg>

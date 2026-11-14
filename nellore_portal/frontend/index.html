@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NELLORE DISTRICT DIGITAL PORTAL | Sri Potti Sriramulu Nellore District</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': {
+                            800: '#142a5c',
+                            900: '#0f224a',
+                            950: '#0a1733',
+                        },
+                        'gold': {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        'emerald-ap': {
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Leaflet GIS Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Custom CSS styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Telugu:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', 'Noto Sans Telugu', system-ui, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(10, 23, 51, 0.94), rgba(15, 34, 74, 0.85)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .portal-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+        }
+
+        .portal-glass-dark {
+            background: rgba(10, 23, 51, 0.92);
+            backdrop-filter: blur(16px);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        #districtMap {
+            height: 580px;
+            width: 100%;
+            border-radius: 0.75rem;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-400 selection:text-slate-900">
+
+    <!-- Top Gov Bar & Live Data Status -->
+    <div class="bg-navy-950 text-slate-300 text-xs py-1.5 px-4 sm:px-8 border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-4">
+            <span class="flex items-center gap-1.5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Emblem_of_Andhra_Pradesh.svg" alt="AP Emblem" class="w-4 h-4 object-contain inline-block filter brightness-200" onerror="this.style.display='none'">
+                <span class="font-semibold text-white">Government of Andhra Pradesh</span> &bull; <span>Sri Potti Sriramulu Nellore District</span>
+            </span>
+            <span class="hidden md:inline-flex items-center gap-1.5 text-emerald-400 font-medium">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Live Open Data Sync: Active</span>
+            </span>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <!-- Language Selection: English, Telugu, Hindi -->
+            <div class="flex items-center bg-white/10 rounded-lg p-0.5 text-[11px] font-semibold border border-white/15">
+                <button onclick="setLanguage('en')" class="lang-btn px-2 py-0.5 rounded transition bg-amber-500 text-slate-900 font-bold" data-lang="en">English</button>
+                <button onclick="setLanguage('te')" class="lang-btn px-2 py-0.5 rounded transition text-white hover:bg-slate-700" data-lang="te">తెలుగు</button>
+                <button onclick="setLanguage('hi')" class="lang-btn px-2 py-0.5 rounded transition text-white hover:bg-slate-700" data-lang="hi">हिन्दी</button>
+            </div>
+
+            <!-- Manual Refresh Button -->
+            <button id="manualRefreshBtn" onclick="triggerDataRefresh()" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1 text-[11px] font-semibold">
+                <i class="fas fa-sync-alt text-[10px]"></i>
+                <span class="hidden sm:inline" data-i18n="btn_refresh">Refresh Live Data</span>
+            </button>
+
+            <!-- Auth Container -->
+            <div id="authNavControls" class="flex items-center gap-2">
+                <!-- Dynamically rendered by app.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Official Header & Navigation Bar -->
+    <header class="bg-navy-900 text-white sticky top-0 z-40 shadow-xl border-b-2 border-amber-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            <!-- Logo & Title -->
+            <a href="#heroSection" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 text-navy-950 font-black text-xl flex items-center justify-center shadow-lg transform group-hover:scale-105 transition">
+                    <i class="fas fa-landmark text-navy-900"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-xl font-black tracking-tight text-white flex items-center gap-2">
+                        <span data-i18n="portal_title">NELLORE DISTRICT DIGITAL PORTAL</span>
+                        <span class="text-[10px] bg-emerald-600 text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider hidden lg:inline">Official 2026</span>
+                    </h1>
+                    <p class="text-xs text-amber-300/90 font-medium tracking-wide" data-i18n="tagline">Connecting Villages, Empowering People, Building Tomorrow</p>
+                </div>
+            </a>
+
+            <!-- Global Search & Quick Actions -->
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <div class="relative flex-1 md:w-72">
+                    <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    <input type="text" id="globalDistrictSearch" placeholder="Search mandals, villages, crops, jobs..." 
+                        class="w-full bg-slate-800/90 text-white text-xs pl-8 pr-3 py-2 rounded-lg border border-slate-700 focus:outline-none focus:border-amber-400 transition"
+                        data-i18n-placeholder="search_placeholder">
+                </div>
+
+                <!-- Report Download Dropdown -->
+                <div class="relative group">
+                    <button class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-3 py-2 rounded-lg flex items-center gap-1.5 shadow transition">
+                        <i class="fas fa-file-download text-xs"></i>
+                        <span class="hidden sm:inline" data-i18n="btn_download_reports">Reports</span>
+                        <i class="fas fa-chevron-down text-[10px] opacity-75"></i>
+                    </button>
+                    <div class="absolute right-0 top-full mt-1 w-56 bg-white text-slate-800 rounded-xl shadow-2xl border border-slate-200 py-2 hidden group-hover:block z-50 text-xs">
+                        <a href="javascript:void(0)" onclick="generateDistrictPDF()" class="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-50 font-medium">
+                            <i class="fas fa-file-pdf text-red-600 text-sm"></i> Download District Dossier (PDF)
+                        </a>
+                        <a href="javascript:void(0)" onclick="downloadCSV('mandals')" class="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-50 font-medium">
+                            <i class="fas fa-file-csv text-emerald-600 text-sm"></i> 38 Mandals Census (Excel/CSV)
+                        </a>
+                        <a href="javascript:void(0)" onclick="downloadCSV('agriculture')" class="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-50 font-medium">
+                            <i class="fas fa-seedling text-amber-600 text-sm"></i> Agriculture & Land Balance (CSV)
+                        </a>
+                        <a href="javascript:void(0)" onclick="downloadCSV('exports')" class="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-50 font-medium">
+                            <i class="fas fa-ship text-blue-600 text-sm"></i> Exports & Port Trade Stats (CSV)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Business Registration Button -->
+                <button onclick="openBusinessModal()" class="bg-amber-500 hover:bg-amber-400 text-navy-950 font-bold text-xs px-3 py-2 rounded-lg flex items-center gap-1.5 shadow transition">
+                    <i class="fas fa-briefcase text-xs"></i>
+                    <span class="hidden lg:inline" data-i18n="btn_register_business">Register Business</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sticky Navigation Links -->
+        <nav class="bg-navy-950/90 border-t border-white/10 px-4 sm:px-8 overflow-x-auto text-xs whitespace-nowrap scrollbar-none">
+            <div class="max-w-7xl mx-auto flex items-center space-x-1 sm:space-x-3 py-1.5">
+                <a href="#dashboardSection" class="portal-nav-link text-amber-400 border-b-2 border-amber-400 font-semibold px-3 py-1.5 rounded transition" data-i18n="nav_dashboard">Main Dashboard</a>
+                <a href="#mandalsSection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_mandals">Mandals & Panchayats</a>
+                <a href="#villagesSection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_villages">Village Database</a>
+                <a href="#mapsSection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_maps">District GIS Map</a>
+                <a href="#agricultureSection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_agri">Agriculture & Land</a>
+                <a href="#economySection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_economy">Exports & Economy</a>
+                <a href="#transportSection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_transport">Transport & Infra</a>
+                <a href="#visionSection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_vision2036">Nellore 2036 Vision</a>
+                <a href="#directorySection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_directory">Education, Health & Jobs</a>
+                <a href="#feedbackSection" class="portal-nav-link text-slate-200 hover:text-white font-medium px-3 py-1.5 rounded transition" data-i18n="nav_feedback">Citizen Grievance</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Urgent Announcements Marquee -->
+    <div class="bg-amber-400 text-navy-950 text-xs font-semibold py-1.5 px-4 flex items-center overflow-hidden border-b border-amber-500 shadow-inner">
+        <span class="bg-navy-900 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider mr-3 flex-shrink-0">
+            <i class="fas fa-bullhorn mr-1 text-amber-400"></i> District Bulletin
+        </span>
+        <div class="whitespace-nowrap overflow-hidden w-full">
+            <div id="announcementTicker" class="inline-block animate-marquee">
+                Loading verified district announcements and Kharif crop updates...
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. HERO & LANDING SECTION -->
+    <section id="heroSection" class="hero-bg text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden border-b-4 border-amber-500">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-semibold text-amber-300 border border-white/20 mb-4">
+                    <i class="fas fa-certificate text-amber-400"></i>
+                    <span data-i18n="discover_nellore">Discover Nellore – People, Places, Progress & Opportunities</span>
+                </div>
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-4">
+                    Connecting Villages.<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-emerald-400">Empowering People.</span><br>
+                    Building Tomorrow.
+                </h2>
+                <p class="text-sm sm:text-base text-slate-300 mb-8 leading-relaxed font-light" data-i18n="hero_sub">
+                    Welcome to the official Sri Potti Sriramulu Nellore District Digital Platform. Explore high-precision geographic databases, 38 mandals, 943 revenue villages, agricultural land balances, Asia's seafood export capital, Krishnapatnam maritime trade, and the 10-year transformation roadmap toward Nellore 2036.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="#dashboardSection" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-navy-950 font-bold px-6 py-3 rounded-xl text-sm shadow-xl hover:shadow-amber-500/30 transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fas fa-chart-pie"></i> <span data-i18n="btn_explore">Explore District Portal</span>
+                    </a>
+                    <a href="#mapsSection" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl text-sm border border-white/25 backdrop-blur-md transition flex items-center gap-2">
+                        <i class="fas fa-map-marked-alt text-amber-400"></i> <span data-i18n="btn_view_map">Interactive GIS Map</span>
+                    </a>
+                    <a href="#visionSection" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-5 py-3 rounded-xl text-sm shadow-lg transition flex items-center gap-2">
+                        <i class="fas fa-rocket text-amber-300"></i> <span>Nellore 2036 Vision</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Highlights Carousel Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-white/15">
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/15">
+                    <div class="text-[11px] text-amber-300 font-bold uppercase tracking-wider">Demographics</div>
+                    <div class="text-2xl font-black text-white mt-1">29.64 Lakhs</div>
+                    <div class="text-xs text-slate-300">Total District Population</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/15">
+                    <div class="text-[11px] text-emerald-300 font-bold uppercase tracking-wider">Administration</div>
+                    <div class="text-2xl font-black text-white mt-1">38 Mandals</div>
+                    <div class="text-xs text-slate-300">943 Revenue Villages</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/15">
+                    <div class="text-[11px] text-blue-300 font-bold uppercase tracking-wider">Merchandise Trade</div>
+                    <div class="text-2xl font-black text-white mt-1">₹22,450 Cr</div>
+                    <div class="text-xs text-slate-300">Annual Merchandise Exports</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/15">
+                    <div class="text-[11px] text-purple-300 font-bold uppercase tracking-wider">Arable Farmland</div>
+                    <div class="text-2xl font-black text-white mt-1">5.83 Lakh Ha</div>
+                    <div class="text-xs text-slate-300">Pennar Delta & Canal Grid</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. MAIN DASHBOARD: DISTRICT KEY METRICS & ANIMATED CHARTS -->
+    <section id="dashboardSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-200">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 2</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">Executive District Dashboard</h3>
+                <p class="text-sm text-slate-500">Live indicators, demographic balances, literacy, and verified departmental statistics</p>
+            </div>
+            <div class="flex items-center gap-3 text-xs text-slate-500">
+                <span class="bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                    <i class="fas fa-check-double text-emerald-600"></i> Open-Data API Verified
+                </span>
+                <span>Last updated: <b id="lastSyncedTimestamp" class="text-slate-800">2026-11-02 15:30 IST</b></span>
+            </div>
+        </div>
+
+        <!-- 12 Key Metrics Counter Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
+            <!-- 1. Total Population -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_population">Total Population</span>
+                    <i class="fas fa-users text-blue-900 text-lg"></i>
+                </div>
+                <div id="countPopulation" class="text-2xl font-black text-navy-900">29,63,557</div>
+                <div class="text-[11px] text-slate-500 mt-1">Census: 14.93L (M) / 14.70L (F)</div>
+            </div>
+
+            <!-- 2. Revenue Villages -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_villages">Total Villages</span>
+                    <i class="fas fa-home text-emerald-600 text-lg"></i>
+                </div>
+                <div id="countVillages" class="text-2xl font-black text-navy-900">943 Villages</div>
+                <div class="text-[11px] text-slate-500 mt-1">1,180 Rural Habitations</div>
+            </div>
+
+            <!-- 3. Mandals -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_mandals">Total Mandals</span>
+                    <i class="fas fa-map text-amber-500 text-lg"></i>
+                </div>
+                <div id="countMandals" class="text-2xl font-black text-navy-900">38 Mandals</div>
+                <div class="text-[11px] text-slate-500 mt-1">4 Revenue Divisions</div>
+            </div>
+
+            <!-- 4. Gram Panchayats -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_panchayats">Gram Panchayats</span>
+                    <i class="fas fa-landmark text-purple-600 text-lg"></i>
+                </div>
+                <div id="countPanchayats" class="text-2xl font-black text-navy-900">672 Panchayats</div>
+                <div class="text-[11px] text-slate-500 mt-1">Grama Sachivalayam Network</div>
+            </div>
+
+            <!-- 5. Geographical Area -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_area">Total Area</span>
+                    <i class="fas fa-globe-asia text-indigo-600 text-lg"></i>
+                </div>
+                <div class="text-2xl font-black text-navy-900">13,076 km²</div>
+                <div class="text-[11px] text-slate-500 mt-1">13,07,600 Hectares</div>
+            </div>
+
+            <!-- 6. Population Density -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_density">Population Density</span>
+                    <i class="fas fa-user-friends text-cyan-600 text-lg"></i>
+                </div>
+                <div class="text-2xl font-black text-navy-900">227 / km²</div>
+                <div class="text-[11px] text-slate-500 mt-1">District Average</div>
+            </div>
+
+            <!-- 7. Literacy Rate -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_literacy">Literacy Rate</span>
+                    <i class="fas fa-book-reader text-teal-600 text-lg"></i>
+                </div>
+                <div id="countLiteracy" class="text-2xl font-black text-navy-900">68.9%</div>
+                <div class="text-[11px] text-slate-500 mt-1">Male: 75.7% | Female: 62.0%</div>
+            </div>
+
+            <!-- 8. Agricultural Farmland -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_agri_land">Agricultural Land</span>
+                    <i class="fas fa-seedling text-emerald-700 text-lg"></i>
+                </div>
+                <div id="countAgriLand" class="text-2xl font-black text-navy-900">5.83 Lakh Ha</div>
+                <div class="text-[11px] text-slate-500 mt-1">Molagolukulu, Shrimp, Citrus</div>
+            </div>
+
+            <!-- 9. Total Exports -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_exports">Annual Exports</span>
+                    <i class="fas fa-box-open text-blue-600 text-lg"></i>
+                </div>
+                <div id="countExports" class="text-2xl font-black text-emerald-700">₹22,450 Cr</div>
+                <div class="text-[11px] text-slate-500 mt-1">24.5% India Seafood Export Share</div>
+            </div>
+
+            <!-- 10. Total Imports -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_imports">Annual Imports</span>
+                    <i class="fas fa-ship text-amber-600 text-lg"></i>
+                </div>
+                <div class="text-2xl font-black text-slate-900">₹31,200 Cr</div>
+                <div class="text-[11px] text-slate-500 mt-1">Krishnapatnam Port Bulk Cargo</div>
+            </div>
+
+            <!-- 11. Per-Person Land -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="stat_per_person_land">Per-Person Land</span>
+                    <i class="fas fa-calculator text-emerald-600 text-lg"></i>
+                </div>
+                <div id="countPerPersonLand" class="text-2xl font-black text-navy-900">0.44 Ha</div>
+                <div class="text-[11px] text-slate-500 mt-1">1.09 Acres / Person Territory</div>
+            </div>
+
+            <!-- 12. Industrial Units -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Industrial Base</span>
+                    <i class="fas fa-industry text-purple-700 text-lg"></i>
+                </div>
+                <div class="text-2xl font-black text-navy-900">1,480 Units</div>
+                <div class="text-[11px] text-slate-500 mt-1">SEZ, Mining, Pharma, Agro</div>
+            </div>
+        </div>
+
+        <!-- Section 2 Scientific Formula Container: Per-Person Land Calculation -->
+        <div id="perPersonLandExplanation" class="mb-10">
+            <!-- Dynamically populated from /api/stats -->
+        </div>
+
+        <!-- Demographic & Structural Graphs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Gender Ratio Doughnut Chart -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="font-bold text-base text-slate-900">Gender Demographics & Sex Ratio</h4>
+                        <div class="text-xs text-slate-500">Sex Ratio: 986 Females per 1,000 Males (Census of India)</div>
+                    </div>
+                    <span class="text-xs bg-blue-50 text-blue-800 font-bold px-2.5 py-1 rounded">29.64 Lakhs</span>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="genderChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Urban vs Rural Balance Chart -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="font-bold text-base text-slate-900">Rural vs Urban Settlement Balance</h4>
+                        <div class="text-xs text-slate-500">70.9% Rural Habitations vs 29.1% Urban Centers</div>
+                    </div>
+                    <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2.5 py-1 rounded">Settlement Ratio</span>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="urbanRuralChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 & 4. MANDALS AND GRAM PANCHAYATS DIRECTORY -->
+    <section id="mandalsSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 3 & 4</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">Mandals & Gram Panchayats Directory</h3>
+                <p class="text-sm text-slate-500">Explore administrative divisions, village networks, demographics, and local enterprises</p>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="relative w-64">
+                    <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    <input type="text" id="mandalSearchInput" placeholder="Search 38 Mandals..." 
+                        class="w-full bg-white text-xs pl-8 pr-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 shadow-sm">
+                </div>
+                <button onclick="downloadCSV('mandals')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 border border-slate-200">
+                    <i class="fas fa-file-excel text-emerald-600"></i> Export Mandals (CSV)
+                </button>
+            </div>
+        </div>
+
+        <!-- Mandals Grid -->
+        <div id="mandalsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Dynamically populated by app.js -->
+        </div>
+    </section>
+
+    <!-- 3. VILLAGE DATABASE EXPLORER -->
+    <section id="villagesSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 3 Database</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">District Population & Village Database</h3>
+                <p class="text-sm text-slate-500">Detailed dossiers for revenue villages and Gram Panchayats</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap items-center gap-3">
+                <select id="villageMandalSelect" class="bg-white border border-slate-200 text-xs rounded-xl px-3 py-2 font-medium focus:outline-none focus:border-blue-600 shadow-sm">
+                    <option value="">All Mandals (38)</option>
+                </select>
+                <select id="villageCategorySelect" class="bg-white border border-slate-200 text-xs rounded-xl px-3 py-2 font-medium focus:outline-none focus:border-blue-600 shadow-sm">
+                    <option value="">All Types (Rural & Urban)</option>
+                    <option value="Rural">Rural</option>
+                    <option value="Semi-Urban">Semi-Urban</option>
+                    <option value="Urban">Urban</option>
+                </select>
+                <input type="text" id="villageSearchInput" placeholder="Filter village by name..." 
+                    class="bg-white border border-slate-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-blue-600 shadow-sm w-48">
+            </div>
+        </div>
+
+        <!-- Village Table Container -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-navy-900 text-white text-[11px] uppercase tracking-wider">
+                            <th class="py-3 px-4 font-bold">Village & Telugu Name</th>
+                            <th class="py-3 px-4 font-bold">Mandal</th>
+                            <th class="py-3 px-4 font-bold">Gram Panchayat</th>
+                            <th class="py-3 px-4 font-bold">Population</th>
+                            <th class="py-3 px-4 font-bold">Classification</th>
+                            <th class="py-3 px-4 font-bold">Major Crop / Economic Base</th>
+                            <th class="py-3 px-4 font-bold text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="villagesTableBody">
+                        <!-- Dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. GOOGLE MAPS & INTERACTIVE GIS MAP INTEGRATION -->
+    <section id="mapsSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 5</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">Interactive District GIS & Facility Map</h3>
+                <p class="text-sm text-slate-500">Google Maps API integrated geospatial visualizer with multi-category facility markers</p>
+            </div>
+
+            <!-- Map Controls & Engine Switcher -->
+            <div class="flex flex-wrap items-center gap-2">
+                <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+                    <button onclick="filterMapCategory('all')" class="map-filter-btn px-3 py-1 rounded-lg font-semibold bg-blue-900 text-white shadow" data-type="all">All Layers</button>
+                    <button onclick="filterMapCategory('Hospital')" class="map-filter-btn px-3 py-1 rounded-lg font-semibold text-slate-700 hover:text-slate-900" data-type="Hospital"><i class="fas fa-hospital text-red-500 mr-1"></i> Hospitals</button>
+                    <button onclick="filterMapCategory('School')" class="map-filter-btn px-3 py-1 rounded-lg font-semibold text-slate-700 hover:text-slate-900" data-type="School"><i class="fas fa-graduation-cap text-blue-500 mr-1"></i> Colleges</button>
+                    <button onclick="filterMapCategory('Industry')" class="map-filter-btn px-3 py-1 rounded-lg font-semibold text-slate-700 hover:text-slate-900" data-type="Industry"><i class="fas fa-industry text-purple-500 mr-1"></i> Industries</button>
+                    <button onclick="filterMapCategory('Port')" class="map-filter-btn px-3 py-1 rounded-lg font-semibold text-slate-700 hover:text-slate-900" data-type="Port"><i class="fas fa-ship text-cyan-600 mr-1"></i> Ports</button>
+                    <button onclick="filterMapCategory('Railway')" class="map-filter-btn px-3 py-1 rounded-lg font-semibold text-slate-700 hover:text-slate-900" data-type="Railway"><i class="fas fa-train text-amber-500 mr-1"></i> Rail Hubs</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Maps API Key Input Bar (Optional custom key insertion) -->
+        <div class="bg-blue-50/70 border border-blue-200 p-3 rounded-xl mb-4 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center gap-2 text-blue-900 font-medium">
+                <i class="fab fa-google text-blue-600 text-sm"></i>
+                <span><b>Google Maps API Integration:</b> Running with high-precision district boundary polygons, custom markers & coordinates.</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <input type="text" id="customGmapApiKey" placeholder="Enter Google Maps API Key (Optional)..." 
+                    class="bg-white border border-blue-200 text-xs px-3 py-1 rounded-lg w-64 focus:outline-none focus:border-blue-600">
+                <button onclick="loadGoogleMaps(document.getElementById('customGmapApiKey').value)" class="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-3 py-1 rounded-lg transition">
+                    Activate Google Maps
+                </button>
+            </div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="relative shadow-xl rounded-2xl border border-slate-300 overflow-hidden">
+            <div id="districtMap"></div>
+        </div>
+    </section>
+
+    <!-- 6. AGRICULTURE AND LAND INFORMATION DASHBOARD -->
+    <section id="agricultureSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 6</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">Agriculture & Land Balance Dashboard</h3>
+                <p class="text-sm text-slate-500">Land classification, irrigation networks, crop production, and scientific land availability per resident</p>
+            </div>
+            <button onclick="downloadCSV('agriculture')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow">
+                <i class="fas fa-download"></i> Export Agriculture Report (CSV)
+            </button>
+        </div>
+
+        <!-- Land Distribution & Per-Person Interactive Slider -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+            <!-- Land Distribution Doughnut -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="font-bold text-base text-slate-900">Total District Land Classification</h4>
+                        <div class="text-xs text-slate-500">Total Geographical Area: 13,07,600 Hectares (13,076 km²)</div>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded">5.83L Ha Farmland</span>
+                </div>
+                <div class="h-72 relative">
+                    <canvas id="landDistributionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Per-Person Land Interactive Modeler -->
+            <div class="bg-gradient-to-br from-navy-950 to-slate-900 text-white p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded border border-amber-500/30">Scientific Calculator</span>
+                    <h4 class="text-lg font-black text-white mt-3">Per-Person Land Share Modeler</h4>
+                    <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                        Calculates theoretical geographical territory divided by population vs net arable farmland.
+                    </p>
+
+                    <!-- Interactive Slider -->
+                    <div class="mt-6 space-y-3">
+                        <div class="flex justify-between text-xs font-semibold">
+                            <span class="text-slate-400">Simulate Population:</span>
+                            <span id="simulatedPopulationDisplay" class="text-amber-400 font-bold">29.64 Lakhs</span>
+                        </div>
+                        <input type="range" id="popSimulationSlider" min="2000000" max="4500000" step="50000" value="2963557"
+                            oninput="updateLandSimulation(this.value)"
+                            class="w-full accent-amber-500 cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-400">
+                            <span>20 Lakhs</span>
+                            <span>Current (29.6L)</span>
+                            <span>45 Lakhs</span>
+                        </div>
+                    </div>
+
+                    <!-- Calculated Result Output -->
+                    <div class="mt-6 grid grid-cols-2 gap-3 text-center">
+                        <div class="bg-white/10 p-3 rounded-xl border border-white/15">
+                            <div class="text-[10px] uppercase text-slate-400 font-bold">Gross Land / Person</div>
+                            <div id="simulatedPerPersonHa" class="text-xl font-black text-amber-400 mt-0.5">0.441 Ha</div>
+                            <div id="simulatedPerPersonAcres" class="text-[11px] text-emerald-300">1.09 Acres</div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-xl border border-white/15">
+                            <div class="text-[10px] uppercase text-slate-400 font-bold">Sq. Meters / Person</div>
+                            <div id="simulatedPerPersonSqm" class="text-xl font-black text-white mt-0.5">4,412 m²</div>
+                            <div class="text-[11px] text-slate-400">Territorial Share</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-[11px] text-slate-400 border-t border-white/10 pt-3 mt-4 leading-normal">
+                    <i class="fas fa-shield-alt text-emerald-400 mr-1"></i> <b>Statutory Note:</b> Clearly distinguishes total sovereign territory (rivers, forests, public roads) from registered private agricultural holdings.
+                </div>
+            </div>
+        </div>
+
+        <!-- Crops Production Chart & Table -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+            <!-- Crops Production Bar Chart -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="font-bold text-base text-slate-900">Major Crop & Aquaculture Output (Metric Tonnes)</h4>
+                        <div class="text-xs text-slate-500">Paddy (Molagolukulu), Sugarcane, Vannamei Shrimps & Gudur Citrus</div>
+                    </div>
+                    <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded">Annual MT</span>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="cropsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Crops Detailed Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between">
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+                    <h4 class="font-bold text-base text-slate-900">Crop Acreage & Output Summary</h4>
+                    <span class="text-xs text-slate-500">Kharif & Rabi Season</span>
+                </div>
+                <div class="overflow-x-auto max-h-72">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-slate-50 text-slate-700 sticky top-0">
+                            <tr>
+                                <th class="py-2.5 px-3 font-bold">Crop / Commodity</th>
+                                <th class="py-2.5 px-3 font-bold">Area (Ha)</th>
+                                <th class="py-2.5 px-3 font-bold">Production (MT)</th>
+                                <th class="py-2.5 px-3 font-bold">Yield</th>
+                                <th class="py-2.5 px-3 font-bold">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cropsTableBody">
+                            <!-- Dynamically loaded -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 bg-slate-50 text-[11px] text-slate-500 border-t">
+                    Sources: Department of Agriculture, Govt of AP & Marine Products Export Development Authority (MPEDA).
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. EXPORTS AND IMPORTS – DISTRICT ECONOMIC ENGINE & BUSINESS REGISTRATION -->
+    <section id="economySection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 7</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">Exports, Imports & District Marketing</h3>
+                <p class="text-sm text-slate-500">Asia's shrimp capital, Krishnapatnam multi-cargo seaport, mineral wealth, and verified business directory</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openBusinessModal()" class="bg-amber-500 hover:bg-amber-400 text-navy-950 font-bold text-xs px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow">
+                    <i class="fas fa-store"></i> Register Your Business
+                </button>
+                <button onclick="downloadCSV('exports')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 border border-slate-200">
+                    <i class="fas fa-file-csv text-blue-600"></i> Trade Data (CSV)
+                </button>
+            </div>
+        </div>
+
+        <!-- Export Charts: Growth Trend & Commodity Breakdown -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+            <!-- Export Growth Trend Line Chart -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="font-bold text-base text-slate-900">Year-wise Export Growth & Port Cargo</h4>
+                        <div class="text-xs text-slate-500">Value in ₹ Crores & Seaport Tonnage (2020 - 2026)</div>
+                    </div>
+                    <span class="text-xs bg-blue-50 text-blue-800 font-bold px-2 py-0.5 rounded">10.5% CAGR</span>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="exportTrendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Export Commodity Shares Doughnut -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="font-bold text-base text-slate-900">Major Export Commodity Shares</h4>
+                        <div class="text-xs text-slate-500">Vannamei Shrimp, Rice, Footwear, Minerals & Lemons</div>
+                    </div>
+                    <span class="text-xs bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded">₹22,450 Cr</span>
+                </div>
+                <div class="h-64 relative">
+                    <canvas id="exportCommoditiesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exports & Imports Data Tables -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+            <!-- Exports Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-900 to-navy-900 text-white p-3.5 flex items-center justify-between">
+                    <h4 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-plane-departure text-amber-400"></i> Major Export Products from Nellore</h4>
+                    <span class="text-xs text-amber-300 font-semibold">₹22,450 Cr Total</span>
+                </div>
+                <div class="overflow-x-auto max-h-72">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-slate-50 text-slate-700 sticky top-0">
+                            <tr>
+                                <th class="py-2.5 px-3 font-bold">Product</th>
+                                <th class="py-2.5 px-3 font-bold">Value (₹ Cr)</th>
+                                <th class="py-2.5 px-3 font-bold">Volume</th>
+                                <th class="py-2.5 px-3 font-bold">Top Destinations</th>
+                                <th class="py-2.5 px-3 font-bold">Exporters</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exportsTableBody">
+                            <!-- Dynamically loaded -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Imports Table (Krishnapatnam Port) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-3.5 flex items-center justify-between">
+                    <h4 class="font-bold text-sm flex items-center gap-2"><i class="fas fa-plane-arrival text-emerald-400"></i> Strategic Imports via Krishnapatnam Port</h4>
+                    <span class="text-xs text-emerald-400 font-semibold">₹31,200 Cr Inward</span>
+                </div>
+                <div class="overflow-x-auto max-h-72">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-slate-50 text-slate-700 sticky top-0">
+                            <tr>
+                                <th class="py-2.5 px-3 font-bold">Commodity</th>
+                                <th class="py-2.5 px-3 font-bold">Value (₹ Cr)</th>
+                                <th class="py-2.5 px-3 font-bold">Volume (MT)</th>
+                                <th class="py-2.5 px-3 font-bold">Source Countries</th>
+                                <th class="py-2.5 px-3 font-bold">Terminal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="importsTableBody">
+                            <!-- Dynamically loaded -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verified Local Business Directory -->
+        <div>
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h4 class="font-bold text-xl text-slate-900">Registered Local Businesses & Exporters Directory</h4>
+                    <p class="text-xs text-slate-500">Government-verified enterprises, manufacturing plants, and export promotion units</p>
+                </div>
+                <button onclick="openBusinessModal()" class="text-xs bg-blue-50 text-blue-800 hover:bg-blue-100 font-bold px-3 py-1.5 rounded-lg border border-blue-200 transition">
+                    + Add New Business
+                </button>
+            </div>
+            <div id="businessDirectoryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. TRANSPORT AND INFRASTRUCTURE -->
+    <section id="transportSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 8</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">Transport & Multi-Modal Infrastructure</h3>
+                <p class="text-sm text-slate-500">NH-16 corridor, South Central Railway junctions, Krishnapatnam mega port, and proposed Dagadarthi airport</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="loadTransport()" class="text-xs px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">All</button>
+                <button onclick="loadTransport('Railway')" class="text-xs px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">Railways</button>
+                <button onclick="loadTransport('National Highway')" class="text-xs px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">Highways</button>
+                <button onclick="loadTransport('Port')" class="text-xs px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 font-semibold text-slate-700">Ports</button>
+            </div>
+        </div>
+
+        <!-- Transport Facility Cards Grid -->
+        <div id="transportGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Dynamically populated -->
+        </div>
+    </section>
+
+    <!-- 9. FUTURE 10-YEAR DISTRICT DEVELOPMENT: NELLORE 2036 -->
+    <section id="visionSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="bg-gradient-to-r from-navy-950 via-navy-900 to-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-amber-500/30 relative overflow-hidden mb-10">
+            <div class="relative z-10 max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-amber-400/20 text-amber-300 px-3 py-1 rounded-full text-xs font-bold border border-amber-400/40 mb-3">
+                    <i class="fas fa-brain text-amber-400"></i> AI-Powered 10-Year Strategic Roadmap
+                </div>
+                <h3 class="text-3xl sm:text-5xl font-black tracking-tight text-white mb-2">
+                    NELLORE 2036 – FUTURE DEVELOPMENT VISION
+                </h3>
+                <p class="text-sm text-slate-300 font-light leading-relaxed mb-6">
+                    Comprehensive predictive modeling projecting demographic growth, CBIC manufacturing nodes, renewable energy transition, smart village connectivity, and green maritime dominance from 2026 to 2036.
+                </p>
+                <div class="flex items-center gap-3 text-xs">
+                    <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-md font-semibold">
+                        <i class="fas fa-check-circle mr-1"></i> Formally Approved Projects Labeled
+                    </span>
+                    <span class="bg-purple-500/20 text-purple-300 border border-purple-500/30 px-3 py-1 rounded-md font-semibold">
+                        <i class="fas fa-lightbulb mr-1"></i> Visionary Scenarios Labeled
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2036 Projection Graphs -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-10">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h4 class="font-bold text-base text-slate-900">Projected 10-Year District GDP & Population Growth (2026 - 2036)</h4>
+                    <div class="text-xs text-slate-500">Estimates based on Chennai-Bengaluru Industrial Corridor and Dagadarthi logistics expansion</div>
+                </div>
+                <span class="text-xs bg-amber-50 text-amber-800 font-bold px-2.5 py-1 rounded">Target ₹1,90,000 Cr GSDP</span>
+            </div>
+            <div class="h-64 relative">
+                <canvas id="visionProjectionsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Year-by-Year Strategic Milestones Timeline -->
+        <div class="max-w-4xl mx-auto">
+            <h4 class="font-bold text-xl text-slate-900 mb-6 flex items-center gap-2">
+                <i class="fas fa-stream text-blue-900"></i> Year-Wise Execution Roadmap (2026 &rarr; 2036)
+            </h4>
+            <div id="visionTimeline">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. EDUCATION, HEALTHCARE & EMPLOYMENT DIRECTORY -->
+    <section id="directorySection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Section 10</span>
+                <h3 class="text-3xl font-black text-slate-900 mt-2">Public Services, Healthcare & Employment</h3>
+                <p class="text-sm text-slate-500">Key educational institutions, hospitals, government secretariats, and verified job opportunities</p>
+            </div>
+        </div>
+
+        <!-- Tabbed Services View -->
+        <div class="mb-10">
+            <h4 class="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
+                <i class="fas fa-briefcase text-emerald-600"></i> Active Employment Opportunities in Nellore District
+            </h4>
+            <div id="jobsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+                <!-- Dynamically populated by app.js -->
+            </div>
+
+            <h4 class="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
+                <i class="fas fa-university text-blue-900"></i> Key Institutions, Universities & Hospitals
+            </h4>
+            <div id="institutionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 11 & 12. CITIZEN FEEDBACK & GRIEVANCE SUBMISSION -->
+    <section id="feedbackSection" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200">
+        <div class="max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl">
+            <div class="text-center mb-8">
+                <span class="text-xs font-bold text-navy-800 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Citizen Participation</span>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2">District Feedback & Grievance Portal</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">Submit development proposals, village infrastructure requirements, or administrative feedback directly to the Collectorate.</p>
+            </div>
+
+            <form id="feedbackForm" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+                        <input type="text" id="fbName" required placeholder="Your full name" class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Mobile Number *</label>
+                        <input type="tel" id="fbMobile" required placeholder="10-digit mobile" class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Mandal *</label>
+                        <input type="text" id="fbMandal" required placeholder="e.g. Kovur, Podalakur, Gudur" class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Feedback Category</label>
+                        <select id="fbCategory" class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                            <option value="Roads & Infrastructure">Roads & Infrastructure</option>
+                            <option value="Drinking Water & Sanitation">Drinking Water & Sanitation</option>
+                            <option value="Agriculture & Irrigation">Agriculture & Irrigation</option>
+                            <option value="Education & Schools">Education & Schools</option>
+                            <option value="Healthcare & Hospitals">Healthcare & Hospitals</option>
+                            <option value="New Business & Employment">New Business & Employment</option>
+                            <option value="Nellore 2036 Suggestion">Nellore 2036 Suggestion</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email Address (Optional)</label>
+                    <input type="email" id="fbEmail" placeholder="name@domain.com" class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Your Detailed Suggestion or Grievance *</label>
+                    <textarea id="fbMessage" rows="4" required placeholder="Describe the issue, location, or proposal in detail..." class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold text-sm py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane"></i> Submit to District Administration
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-950 text-slate-400 text-xs py-12 px-4 sm:px-6 lg:px-8 border-t-4 border-amber-500">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-white/10">
+            <div>
+                <div class="flex items-center gap-2 text-white font-black text-base mb-2">
+                    <i class="fas fa-landmark text-amber-400"></i> NELLORE DISTRICT PORTAL
+                </div>
+                <p class="text-xs leading-relaxed text-slate-400">
+                    Official digital platform of Sri Potti Sriramulu Nellore District, Government of Andhra Pradesh. Designed for citizen enablement, economic investment, and future infrastructure planning.
+                </p>
+            </div>
+            <div>
+                <h5 class="font-bold text-white uppercase tracking-wider mb-3">Key Administration Links</h5>
+                <ul class="space-y-1.5 text-xs">
+                    <li><a href="https://nellore.ap.gov.in" target="_blank" class="hover:text-amber-400 transition">&rarr; District Collectorate Official Portal</a></li>
+                    <li><a href="https://data.ap.gov.in" target="_blank" class="hover:text-amber-400 transition">&rarr; Andhra Pradesh Open Data Portal</a></li>
+                    <li><a href="https://spandana.ap.gov.in" target="_blank" class="hover:text-amber-400 transition">&rarr; Spandana Citizen Grievance Redressal</a></li>
+                    <li><a href="https://mpeda.gov.in" target="_blank" class="hover:text-amber-400 transition">&rarr; MPEDA Marine Products Authority</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-bold text-white uppercase tracking-wider mb-3">District Contact Desks</h5>
+                <p class="text-xs leading-relaxed text-slate-400">
+                    Collectorate Complex, Dargamitta, Nellore – 524003<br>
+                    Helpline: 0861-2331200 / 1800-425-4440<br>
+                    Email: collector-nellore@ap.gov.in
+                </p>
+            </div>
+            <div>
+                <h5 class="font-bold text-white uppercase tracking-wider mb-3">Data Integrity & Standards</h5>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    This portal integrates authentic datasets from Census of India, Directorate of Economics & Statistics AP, and Krishnapatnam Port Customs. Projections are explicitly marked as scientific estimates.
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+            <div>&copy; 2026 Sri Potti Sriramulu Nellore District Administration. All rights reserved.</div>
+            <div class="flex items-center gap-4">
+                <span>Designed for Modern Digital Governance</span>
+                <span>Version 3.4.0 (2026 Stable)</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODALS SECTION -->
+
+    <!-- 1. Login Modal -->
+    <div id="loginModal" class="portal-modal fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-navy-900 text-amber-400 rounded-xl flex items-center justify-center mx-auto mb-2 text-xl shadow">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900">District Portal Login</h3>
+                <p class="text-xs text-slate-500 mt-1">Sign in using your Username or Registered Mobile Number</p>
+            </div>
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Username or Mobile Number</label>
+                    <input type="text" id="loginUsername" required placeholder="e.g. admin or 9848022334" class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                </div>
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-xs font-bold text-slate-700">Password</label>
+                        <a href="javascript:alert('Password reset link sent to registered mobile via SMS.')" class="text-xs text-blue-600 hover:underline">Forgot Password?</a>
+                    </div>
+                    <input type="password" id="loginPassword" required placeholder="Enter password" class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                </div>
+                <div class="p-2.5 bg-blue-50 rounded-lg text-[11px] text-blue-900">
+                    <b>Demo Accounts:</b><br>
+                    Admin: <code>admin</code> / <code>admin123</code><br>
+                    Citizen: <code>citizen</code> / <code>citizen123</code>
+                </div>
+                <button type="submit" class="w-full bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs py-3 rounded-xl transition shadow">
+                    Sign In
+                </button>
+            </form>
+            <div class="mt-4 text-center text-xs text-slate-500">
+                New user? <button onclick="closeModal(); openRegisterModal();" class="text-blue-600 font-bold hover:underline">Create an Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Registration Modal -->
+    <div id="registerModal" class="portal-modal fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-bold text-slate-900">Register on Nellore Digital Portal</h3>
+                <p class="text-xs text-slate-500 mt-1">Connect with district services, agribusiness networks, and employment drives</p>
+            </div>
+            <form id="registerForm" class="space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Username *</label>
+                        <input type="text" id="regUsername" required placeholder="Choose username" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
+                        <input type="text" id="regFullName" required placeholder="Full legal name" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Mobile Number *</label>
+                        <input type="tel" id="regMobile" required placeholder="10-digit mobile" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+                        <input type="email" id="regEmail" placeholder="email@address.com" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Citizen Role *</label>
+                        <select id="regRole" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                            <option value="citizen">Citizen Resident</option>
+                            <option value="farmer">Farmer / Aqua Culturist</option>
+                            <option value="business_owner">Business Owner / Exporter</option>
+                            <option value="student">Student / Job Seeker</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Password *</label>
+                        <input type="password" id="regPassword" required placeholder="Create password" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3 rounded-xl transition shadow mt-2">
+                    Complete Registration
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. Business Registration Modal -->
+    <div id="businessModal" class="portal-modal fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            <div class="mb-5">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded">Economic Development Wing</span>
+                <h3 class="text-xl font-bold text-slate-900 mt-1">Register Enterprise in District Directory</h3>
+                <p class="text-xs text-slate-500">List your products and export capacity for domestic and global buyers</p>
+            </div>
+            <form id="businessRegisterForm" class="space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Business Name *</label>
+                        <input type="text" id="bizName" required placeholder="Company or trade name" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Industry Sector *</label>
+                        <select id="bizCategory" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                            <option value="Aquaculture & Seafood">Aquaculture & Seafood</option>
+                            <option value="Agro Processing & Rice">Agro Processing & Rice</option>
+                            <option value="Mica & Minerals">Mica & Minerals</option>
+                            <option value="Handlooms & Textiles">Handlooms & Textiles</option>
+                            <option value="Citrus & Horticulture">Citrus & Horticulture</option>
+                            <option value="Manufacturing & SEZ">Manufacturing & SEZ</option>
+                            <option value="Logistics & Maritime">Logistics & Maritime</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Contact Person *</label>
+                        <input type="text" id="bizContact" required placeholder="Authorized person" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Mobile Number *</label>
+                        <input type="tel" id="bizMobile" required placeholder="Mobile number" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Mandal Location *</label>
+                        <input type="text" id="bizMandal" required placeholder="e.g. Muthukur, Gudur" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Registration / GST No</label>
+                        <input type="text" id="bizRegNo" placeholder="GSTIN or Udyam Reg" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+                    <input type="email" id="bizEmail" placeholder="contact@company.com" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Physical Address *</label>
+                    <input type="text" id="bizAddress" required placeholder="Full facility address" class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Products / Services Offered *</label>
+                    <textarea id="bizProducts" rows="3" required placeholder="List export grades, specifications, monthly production capacity..." class="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-blue-900"></textarea>
+                </div>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" id="bizExportOriented" class="w-4 h-4 text-emerald-600 rounded">
+                    <label for="bizExportOriented" class="text-xs font-medium text-slate-700">Export Oriented Unit (EOU / SEZ)</label>
+                </div>
+                <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs py-3 rounded-xl transition shadow mt-2">
+                    Submit Business for Verification
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Universal Details Modal (For Mandals & Villages) -->
+    <div id="detailModal" class="portal-modal fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+            <div id="detailModalContent">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Admin Console Modal -->
+    <div id="adminModal" class="portal-modal fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-3xl w-full p-6 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            <div class="flex items-center gap-3 border-b pb-4 mb-4">
+                <div class="w-10 h-10 bg-amber-500 text-slate-900 rounded-lg flex items-center justify-center font-bold text-lg">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">District Administrator Console</h3>
+                    <div class="text-xs text-slate-500">Collectorate Monitoring, Citizen Grievances & Data Sync Logs</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-6">
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-100 text-center">
+                    <div class="text-xs text-slate-500 font-semibold">Active Sessions</div>
+                    <div class="text-xl font-black text-blue-900 mt-1">1,482 Users</div>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-100 text-center">
+                    <div class="text-xs text-slate-500 font-semibold">Open Data Sync</div>
+                    <div class="text-xl font-black text-emerald-700 mt-1">ONLINE (100%)</div>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-lg border border-amber-100 text-center">
+                    <div class="text-xs text-slate-500 font-semibold">Pending Grievances</div>
+                    <div class="text-xl font-black text-amber-700 mt-1">1 Registered</div>
+                </div>
+            </div>
+
+            <h5 class="font-bold text-slate-900 text-sm mb-3">Submitted Citizen Grievances & Feedback</h5>
+            <div id="adminFeedbackList" class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                <!-- Dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Suite -->
+    <script src="js/i18n.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/maps.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_chapati_kurma" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#261e16"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_chapati_kurma" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_chapati_kurma)"/>
+  
+      <!-- Plate -->
+      <ellipse cx="200" cy="145" rx="150" ry="80" fill="#3f3f46" filter="url(#shadow_chapati_kurma)"/>
+      <!-- Kurma Bowl -->
+      <circle cx="295" cy="135" r="38" fill="#374151" filter="url(#shadow_chapati_kurma)"/>
+      <circle cx="295" cy="135" r="34" fill="#d97706"/>
+      <circle cx="290" cy="130" r="6" fill="#15803d"/>
+      <circle cx="302" cy="140" r="5" fill="#ea580c"/>
+      <!-- Chapati 1 (Under) -->
+      <circle cx="140" cy="155" r="62" fill="#d97706" filter="url(#shadow_chapati_kurma)"/>
+      <circle cx="140" cy="153" r="58" fill="#f59e0b"/>
+      <!-- Brown roasted spots -->
+      <circle cx="120" cy="140" r="3" fill="#78350f" opacity="0.6"/>
+      <circle cx="155" cy="160" r="4" fill="#78350f" opacity="0.6"/>
+      <!-- Chapati 2 (Puffed Over) -->
+      <circle cx="175" cy="135" r="64" fill="#b45309" filter="url(#shadow_chapati_kurma)"/>
+      <circle cx="175" cy="132" r="60" fill="#fde047"/>
+      <circle cx="170" cy="128" r="48" fill="#fef08a" opacity="0.9"/>
+      <!-- Brown blister marks -->
+      <ellipse cx="160" cy="120" rx="6" ry="4" fill="#92400e" opacity="0.7"/>
+      <ellipse cx="190" cy="140" rx="8" ry="4" fill="#92400e" opacity="0.7"/>
+      <ellipse cx="155" cy="145" rx="7" ry="5" fill="#78350f" opacity="0.6"/>
+      <ellipse cx="200" cy="125" rx="5" ry="3" fill="#78350f" opacity="0.6"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">DINNER • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Whole Wheat Chapati with Veg Kurma</text>
+</svg>

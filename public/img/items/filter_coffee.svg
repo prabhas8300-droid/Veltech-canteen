@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_filter_coffee" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#261e14"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_filter_coffee" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_filter_coffee)"/>
+  
+      <!-- Traditional Brass Dabarah Bowl -->
+      <ellipse cx="200" cy="180" rx="75" ry="32" fill="#b45309" filter="url(#shadow_filter_coffee)"/>
+      <ellipse cx="200" cy="178" rx="70" ry="28" fill="#eab308"/>
+      <ellipse cx="200" cy="176" rx="62" ry="24" fill="#ca8a04"/>
+      <!-- Brass Tumbler -->
+      <path d="M 175,85 L 182,170 L 218,170 L 225,85 Z" fill="#b45309" filter="url(#shadow_filter_coffee)"/>
+      <path d="M 177,85 L 183,168 L 217,168 L 223,85 Z" fill="#eab308"/>
+      <!-- Frothy Coffee Foam on Top -->
+      <ellipse cx="200" cy="85" rx="24" ry="10" fill="#78350f"/>
+      <ellipse cx="200" cy="84" rx="22" ry="8" fill="#fde047" opacity="0.85"/>
+      <ellipse cx="200" cy="83" rx="19" ry="6" fill="#fef08a"/>
+      <!-- Steam vapors -->
+      <path d="M 190,65 Q 185,50 192,38" stroke="#ffffff" stroke-width="2.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      <path d="M 205,68 Q 212,52 206,35" stroke="#ffffff" stroke-width="2.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#f59e0b" text-anchor="middle" letter-spacing="0.8">DRINKS • HOT</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Degree Filter Coffee (Dabarah &amp; Tumbler)</text>
+</svg>

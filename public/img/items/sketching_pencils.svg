@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_sketching_pencils" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d1b1a"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_sketching_pencils" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_sketching_pencils)"/>
+  
+      <!-- Set of 6 Graphite grading pencils -->
+      <rect x="90" y="70" width="200" height="12" rx="2" fill="#292524" filter="url(#shadow_sketching_pencils)"/><polygon points="90,70 90,82 72,76" fill="#fde047"/><polygon points="78,74 78,78 72,76" fill="#0c0a09"/><text x="270" y="79" font-family="sans-serif" font-size="8" font-weight="900" fill="#facc15">2H</text><rect x="90" y="93" width="200" height="12" rx="2" fill="#292524" filter="url(#shadow_sketching_pencils)"/><polygon points="90,93 90,105 72,99" fill="#fde047"/><polygon points="78,97 78,101 72,99" fill="#0c0a09"/><text x="270" y="102" font-family="sans-serif" font-size="8" font-weight="900" fill="#facc15">HB</text><rect x="90" y="116" width="200" height="12" rx="2" fill="#292524" filter="url(#shadow_sketching_pencils)"/><polygon points="90,116 90,128 72,122" fill="#fde047"/><polygon points="78,120 78,124 72,122" fill="#0c0a09"/><text x="270" y="125" font-family="sans-serif" font-size="8" font-weight="900" fill="#facc15">2B</text><rect x="90" y="139" width="200" height="12" rx="2" fill="#292524" filter="url(#shadow_sketching_pencils)"/><polygon points="90,139 90,151 72,145" fill="#fde047"/><polygon points="78,143 78,147 72,145" fill="#0c0a09"/><text x="270" y="148" font-family="sans-serif" font-size="8" font-weight="900" fill="#facc15">4B</text><rect x="90" y="162" width="200" height="12" rx="2" fill="#292524" filter="url(#shadow_sketching_pencils)"/><polygon points="90,162 90,174 72,168" fill="#fde047"/><polygon points="78,166 78,170 72,168" fill="#0c0a09"/><text x="270" y="171" font-family="sans-serif" font-size="8" font-weight="900" fill="#facc15">6B</text><rect x="90" y="185" width="200" height="12" rx="2" fill="#292524" filter="url(#shadow_sketching_pencils)"/><polygon points="90,185 90,197 72,191" fill="#fde047"/><polygon points="78,189 78,193 72,191" fill="#0c0a09"/><text x="270" y="194" font-family="sans-serif" font-size="8" font-weight="900" fill="#facc15">8B</text>
+    
+  <rect x="16" y="16" width="78" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#6366f1" stroke-width="1.2"/>
+  <text x="55.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#6366f1" text-anchor="middle" letter-spacing="0.8">PENCILS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Drawing Sketching Pencil Set (6 Grades)</text>
+</svg>

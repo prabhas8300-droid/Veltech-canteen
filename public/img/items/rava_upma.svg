@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_rava_upma" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f241a"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_rava_upma" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_rava_upma)"/>
+  
+      <ellipse cx="200" cy="140" rx="120" ry="75" fill="#374151" filter="url(#shadow_rava_upma)"/>
+      <ellipse cx="200" cy="135" rx="108" ry="65" fill="#fef08a"/>
+      <ellipse cx="200" cy="130" rx="90" ry="50" fill="#fef9c3"/>
+      <ellipse cx="170" cy="125" rx="10" ry="6" fill="#d97706" transform="rotate(-15 170 125)"/>
+      <ellipse cx="225" cy="135" rx="10" ry="6" fill="#d97706" transform="rotate(20 225 135)"/>
+      <ellipse cx="195" cy="145" rx="9" ry="5" fill="#ca8a04"/>
+      <circle cx="155" cy="140" r="2" fill="#1e293b"/>
+      <circle cx="185" cy="120" r="2.5" fill="#1e293b"/>
+      <circle cx="215" cy="145" r="2" fill="#1e293b"/>
+      <path d="M 180,115 Q 185,110 192,112" stroke="#16a34a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="310" cy="110" r="26" fill="#374151" filter="url(#shadow_rava_upma)"/>
+      <circle cx="310" cy="110" r="23" fill="#f8fafc"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">TIFFIN • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Rava Upma with Cashews</text>
+</svg>

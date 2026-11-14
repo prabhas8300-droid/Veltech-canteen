@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_egg_fried_rice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#222016"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_egg_fried_rice" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_egg_fried_rice)"/>
+  
+      <ellipse cx="200" cy="140" rx="130" ry="75" fill="#18181b" filter="url(#shadow_egg_fried_rice)"/>
+      <ellipse cx="200" cy="135" rx="118" ry="65" fill="#27272a"/>
+      <ellipse cx="200" cy="130" rx="105" ry="55" fill="#fef08a"/>
+      <!-- Scrambled egg golden ribbons -->
+      <ellipse cx="175" cy="120" rx="15" ry="7" fill="#eab308"/>
+      <ellipse cx="220" cy="130" rx="18" ry="8" fill="#eab308"/>
+      <ellipse cx="190" cy="142" rx="14" ry="7" fill="#f59e0b"/>
+      <!-- Scallions &amp; Veggies -->
+      <circle cx="155" cy="132" r="3" fill="#15803d"/>
+      <circle cx="205" cy="118" r="3" fill="#15803d"/>
+      <circle cx="235" cy="140" r="3" fill="#15803d"/>
+      <circle cx="170" cy="140" r="2.5" fill="#ea580c"/>
+    
+  <rect x="16" y="16" width="110" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="71.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#f59e0b" text-anchor="middle" letter-spacing="0.8">LUNCH • EGG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Wok Egg Fried Rice</text>
+</svg>

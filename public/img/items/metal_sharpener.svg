@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_metal_sharpener" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1f26"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_metal_sharpener" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_metal_sharpener)"/>
+  
+      <!-- Die-cast Zinc Wedge -->
+      <polygon points="135,175 145,85 245,85 255,175" fill="#94a3b8" filter="url(#shadow_metal_sharpener)"/>
+      <polygon points="140,170 148,90 242,90 250,170" fill="#cbd5e1"/>
+      <!-- Steel Blade held by screw -->
+      <rect x="175" y="95" width="45" height="70" fill="#64748b"/>
+      <rect x="180" y="98" width="38" height="64" fill="#f8fafc"/>
+      <!-- Small Phillips screw -->
+      <circle cx="199" cy="130" r="6" fill="#475569"/>
+      <line x1="196" y1="130" x2="202" y2="130" stroke="#f8fafc" stroke-width="1.5"/>
+      <line x1="199" y1="127" x2="199" y2="133" stroke="#f8fafc" stroke-width="1.5"/>
+      <!-- Pencil entry cone -->
+      <polygon points="150,110 175,125 150,140" fill="#1e293b"/>
+    
+  <rect x="16" y="16" width="102" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#14b8a6" stroke-width="1.2"/>
+  <text x="67.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#14b8a6" text-anchor="middle" letter-spacing="0.8">SHARPENERS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Staedtler Metal Wedge Sharpener</text>
+</svg>

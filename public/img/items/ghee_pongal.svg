@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_ghee_pongal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#26241a"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_ghee_pongal" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_ghee_pongal)"/>
+  
+      <ellipse cx="200" cy="140" rx="120" ry="75" fill="#374151" filter="url(#shadow_ghee_pongal)"/>
+      <ellipse cx="200" cy="135" rx="108" ry="65" fill="#fef9c3"/>
+      <ellipse cx="200" cy="130" rx="92" ry="52" fill="#fef08a"/>
+      <circle cx="180" cy="125" r="3.5" fill="#1c1917"/>
+      <circle cx="220" cy="138" r="3.5" fill="#1c1917"/>
+      <circle cx="165" cy="142" r="3" fill="#1c1917"/>
+      <ellipse cx="195" cy="120" rx="12" ry="7" fill="#d97706" transform="rotate(-10 195 120)"/>
+      <ellipse cx="215" cy="145" rx="11" ry="6.5" fill="#d97706" transform="rotate(25 215 145)"/>
+      <ellipse cx="160" cy="130" rx="10" ry="6" fill="#ca8a04" transform="rotate(-30 160 130)"/>
+      <path d="M 185,140 Q 190,132 200,136" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="90" cy="115" r="26" fill="#374151" filter="url(#shadow_ghee_pongal)"/>
+      <circle cx="90" cy="115" r="23" fill="#d97706"/>
+      <circle cx="310" cy="115" r="26" fill="#374151" filter="url(#shadow_ghee_pongal)"/>
+      <circle cx="310" cy="115" r="23" fill="#f8fafc"/>
+    
+  <rect x="16" y="16" width="118" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="75.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#22c55e" text-anchor="middle" letter-spacing="0.8">TIFFIN • VEG</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Ghee Ven Pongal with Cashews</text>
+</svg>

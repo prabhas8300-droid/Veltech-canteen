@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs>
+    <linearGradient id="bg_crank_sharpener" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#261517"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <filter id="shadow_crank_sharpener" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg_crank_sharpener)"/>
+  
+      <!-- Machine body -->
+      <rect x="130" y="85" width="120" height="110" rx="10" fill="#dc2626" filter="url(#shadow_crank_sharpener)"/>
+      <!-- Clear waste tray drawer -->
+      <rect x="145" y="135" width="90" height="50" rx="4" fill="#38bdf8" opacity="0.5"/>
+      <!-- Pencil insert hole -->
+      <circle cx="190" cy="110" r="14" fill="#18181b"/>
+      <circle cx="190" cy="110" r="8" fill="#71717a"/>
+      <!-- Rotary Hand Crank Handle on Right -->
+      <rect x="250" y="125" width="25" height="10" rx="2" fill="#94a3b8"/>
+      <circle cx="280" cy="130" r="8" fill="#18181b"/>
+    
+  <rect x="16" y="16" width="102" height="24" rx="12" fill="rgba(0,0,0,0.65)" stroke="#14b8a6" stroke-width="1.2"/>
+  <text x="67.0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" fill="#14b8a6" text-anchor="middle" letter-spacing="0.8">SHARPENERS</text>
+  <text x="200" y="246" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="middle" letter-spacing="0.5">Rotary Desktop Crank Sharpener</text>
+</svg>

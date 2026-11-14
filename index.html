@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Anna Purana | Vel Tech Canteen - Fuel Your Studies, Skip the Wait</title>
+  <meta name="description" content="Official digital ordering and live queue tracker for Anna Purana Canteen at Vel Tech Campus. Order South Indian meals, snacks, combos & track live tokens.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar" aria-label="Announcement">
+    <div class="container announcement-content">
+      <span class="live-pulse-dot" aria-hidden="true"></span>
+      <p><strong>Campus Rush Alert:</strong> Lunch break slots filling fast! Pre-order 15 mins early to bypass token queues.</p>
+      <div class="announcement-right">
+        <span class="canteen-hours-pill">⏰ 7:30 AM – 8:30 PM</span>
+        <span class="campus-badge">📍 Vel Tech Avadi</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <!-- Canteen Brand / Logo -->
+      <a href="#hero" class="brand-logo" aria-label="Anna Purana Vel Tech Home">
+        <div class="logo-icon-wrap">
+          <svg viewBox="0 0 40 40" class="logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" fill="url(#orange-grad)"/>
+            <path d="M12 24C12 28.4183 15.5817 32 20 32C24.4183 32 28 28.4183 28 24H12Z" fill="#FFF"/>
+            <path d="M10 21H30C30.5523 21 31 21.4477 31 22C31 22.5523 30.5523 23 30 23H10C9.44772 23 9 22.5523 9 22C9 21.4477 9.44772 21 10 21Z" fill="#FFF"/>
+            <path d="M16 11C15.5 13 17 15 16 17" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 9C19.5 12 21 14 20 17" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+            <path d="M24 11C23.5 13 25 15 24 17" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="orange-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FF5722"/>
+                <stop offset="1" stop-color="#FF8A00"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Anna Purana</span>
+          <span class="brand-subtitle">Vel Tech Central Canteen</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+        <a href="#specials" class="nav-link">Today's Special</a>
+        <a href="#menu" class="nav-link">Full Menu</a>
+        <a href="#live-queue" class="nav-link">
+          Live Queue Status
+          <span class="badge-rush-indicator">Live</span>
+        </a>
+        <a href="#preorder" class="nav-link">Pre-Order</a>
+        <a href="#footer" class="nav-link">Campus Info</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="nav-actions">
+        <!-- Live Token Mini Badge -->
+        <button class="nav-status-quick-btn" id="quickTokenBtn" title="Current Token Serving">
+          <span class="status-indicator-ping"></span>
+          <span class="quick-token-label">Serving: <strong id="headerServingToken">#A-142</strong></span>
+        </button>
+
+        <!-- Cart Button -->
+        <button class="btn-cart" id="openCartBtn" aria-label="View Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-count-badge" id="cartCount">0</span>
+        </button>
+
+        <!-- Student Login Button / Account State -->
+        <div class="user-auth-wrap" id="userAuthWrap">
+          <button class="btn btn-login" id="loginModalBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span id="loginBtnText">Student Login</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+      <div class="drawer-header">
+        <div class="drawer-user-info" id="drawerUserInfo">
+          <div class="user-avatar-circle">🎓</div>
+          <div>
+            <div class="drawer-user-name">Guest Student</div>
+            <div class="drawer-user-sub">Vel Tech Avadi Campus</div>
+          </div>
+        </div>
+        <button class="close-drawer-btn" id="closeDrawerBtn" aria-label="Close menu">&times;</button>
+      </div>
+
+      <nav class="mobile-nav-list">
+        <a href="#specials" class="mobile-nav-item">
+          <span class="nav-icon">🔥</span>
+          <span>Today's Specials</span>
+        </a>
+        <a href="#menu" class="mobile-nav-item">
+          <span class="nav-icon">📋</span>
+          <span>Full Menu & Combos</span>
+        </a>
+        <a href="#live-queue" class="mobile-nav-item">
+          <span class="nav-icon">📊</span>
+          <span>Live Queue & Token Status</span>
+          <span class="badge-pulse">Live</span>
+        </a>
+        <a href="#preorder" class="mobile-nav-item">
+          <span class="nav-icon">⚡</span>
+          <span>Pre-Order & Wallet Pay</span>
+        </a>
+        <a href="#footer" class="mobile-nav-item">
+          <span class="nav-icon">🏫</span>
+          <span>Campus Hours & Support</span>
+        </a>
+      </nav>
+
+      <div class="drawer-footer">
+        <button class="btn btn-primary w-full" id="mobileDrawerLoginBtn">Student Account & Wallet</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <!-- Hero Text & CTAs -->
+        <div class="hero-content">
+          <div class="hero-tag-wrap">
+            <span class="hero-pill">
+              <span class="pulse-emerald"></span> Vel Tech Campus Dining • Ground Floor Food Court
+            </span>
+          </div>
+
+          <h1 class="hero-title">
+            Fuel Your Studies, <br>
+            <span class="text-gradient">Skip the Wait.</span>
+          </h1>
+
+          <p class="hero-description">
+            Craving crispy hot Dosas, piping hot Vel Tech Dum Biryani, or quick break-time Filter Coffee? Pre-order directly from your phone, check live rush status, and pick up fresh meals instantly with zero queue hassle.
+          </p>
+
+          <!-- Status & Active Hours Pill -->
+          <div class="hero-meta-card">
+            <div class="meta-item">
+              <span class="meta-icon">🕒</span>
+              <div>
+                <span class="meta-label">Active Operating Hours</span>
+                <strong class="meta-val">7:30 AM – 8:30 PM (Mon-Sat)</strong>
+              </div>
+            </div>
+            <div class="meta-divider"></div>
+            <div class="meta-item">
+              <span class="meta-icon">⚡</span>
+              <div>
+                <span class="meta-label">Current Avg. Prep Time</span>
+                <strong class="meta-val highlight-green">6 - 9 Minutes</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Action Buttons -->
+          <div class="hero-cta-group">
+            <a href="#menu" class="btn btn-primary btn-lg">
+              <span>Order Now</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#live-queue" class="btn btn-outline btn-lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 20V10"></path>
+                <path d="M12 20V4"></path>
+                <path d="M6 20v-6"></path>
+              </svg>
+              <span>View Live Queue</span>
+            </a>
+          </div>
+
+          <!-- Quick Trust Badges -->
+          <div class="hero-trust-badges">
+            <div class="trust-badge">
+              <span class="badge-icon">💳</span>
+              <span>Vel Tech Student Card & UPI</span>
+            </div>
+            <div class="trust-badge">
+              <span class="badge-icon">🎟️</span>
+              <span>SMS / Digital Token</span>
+            </div>
+            <div class="trust-badge">
+              <span class="badge-icon">🌿</span>
+              <span>100% Hygienic Steam Kitchen</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Graphic & Interactive Food Showcase -->
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <!-- Main Hero Image -->
+            <img 
+              src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=80" 
+              alt="Crispy South Indian Masala Dosa with Sambar and Chutney at Anna Purana Canteen" 
+              class="hero-food-img"
+              loading="eager"
+            />
+            <div class="image-gradient-overlay"></div>
+
+            <!-- Floating Interactive Card 1: Popular Pick -->
+            <div class="floating-badge badge-top-right">
+              <div class="floating-icon">🌟</div>
+              <div>
+                <span class="badge-title">Chef's Top Pick</span>
+                <span class="badge-subtitle">Ghee Roast + Filter Kaapi</span>
+              </div>
+              <span class="badge-price">₹65</span>
+            </div>
+
+            <!-- Floating Interactive Card 2: Live Status Mini Widget -->
+            <div class="floating-badge badge-bottom-left">
+              <div class="live-dot-green"></div>
+              <div>
+                <span class="badge-title">Counter 1 Queue</span>
+                <span class="badge-subtitle">Express Serving: 4 mins</span>
+              </div>
+              <span class="rush-pill rush-moderate">Normal Rush</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE CANTEEN STATUS WIDGET SECTION -->
+    <section class="section live-status-section" id="live-queue">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <span class="pulse-indicator"></span> Real-Time Campus Dashboard
+          </div>
+          <h2 class="section-title">Live Canteen & Queue Status</h2>
+          <p class="section-subtitle">
+            Keep track of counter crowds, preparation times, and your token progress directly from your phone.
+          </p>
+        </div>
+
+        <div class="status-dashboard-grid">
+          <!-- Card 1: Peak Hour Rush Meter -->
+          <div class="status-card rush-status-card">
+            <div class="card-header-flex">
+              <div class="card-icon-title">
+                <span class="card-badge-icon">📊</span>
+                <div>
+                  <h3 class="card-title">Current Peak Status</h3>
+                  <span class="card-sub">Real-time crowd tracking</span>
+                </div>
+              </div>
+              <span class="rush-badge-status" id="rushBadgeText">Moderate Crowd</span>
+            </div>
+
+            <div class="rush-meter-wrapper">
+              <div class="meter-bar-track">
+                <div class="meter-bar-fill" id="meterFill" style="width: 48%;"></div>
+              </div>
+              <div class="meter-labels">
+                <span class="label-low">Quiet (0-20%)</span>
+                <span class="label-med active-label">Moderate (40-60%)</span>
+                <span class="label-high">Peak Rush (80-100%)</span>
+              </div>
+            </div>
+
+            <div class="rush-meta-info">
+              <div class="info-pill">
+                <span class="pill-title">Next Expected Rush:</span>
+                <span class="pill-value">1:15 PM – 2:00 PM (Lunch Hour)</span>
+              </div>
+              <div class="info-pill">
+                <span class="pill-title">Recommended Action:</span>
+                <span class="pill-value text-accent">Pre-order now for instant pickup</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Counter Prep Times -->
+          <div class="status-card prep-times-card">
+            <div class="card-header-flex">
+              <div class="card-icon-title">
+                <span class="card-badge-icon">⏱️</span>
+                <div>
+                  <h3 class="card-title">Live Prep Times</h3>
+                  <span class="card-sub">Updated every 60 seconds</span>
+                </div>
+              </div>
+              <span class="live-sync-indicator" id="syncStatus">
+                <span class="sync-dot"></span> Synced
+              </span>
+            </div>
+
+            <div class="counter-list">
+              <div class="counter-row">
+                <div class="counter-info">
+                  <span class="counter-name">Counter 1: Meals & Thali</span>
+                  <span class="counter-desc">South Indian lunch, Biryani combos</span>
+                </div>
+                <div class="prep-time-badge time-green">~8 mins</div>
+              </div>
+
+              <div class="counter-row">
+                <div class="counter-info">
+                  <span class="counter-name">Counter 2: Tiffin & Dosa Corner</span>
+                  <span class="counter-desc">Ghee dosa, poori, idli vadas</span>
+                </div>
+                <div class="prep-time-badge time-orange">~12 mins</div>
+              </div>
+
+              <div class="counter-row">
+                <div class="counter-info">
+                  <span class="counter-name">Counter 3: Quick Bites & Snacks</span>
+                  <span class="counter-desc">Samosa, puffs, cutlets, Maggi</span>
+                </div>
+                <div class="prep-time-badge time-green">~4 mins</div>
+              </div>
+
+              <div class="counter-row">
+                <div class="counter-info">
+                  <span class="counter-name">Counter 4: Juice & Filter Coffee</span>
+                  <span class="counter-desc">Fresh juices, cold coffee, hot tea</span>
+                </div>
+                <div class="prep-time-badge time-green">~3 mins</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Digital Token System Display -->
+          <div class="status-card token-board-card">
+            <div class="card-header-flex">
+              <div class="card-icon-title">
+                <span class="card-badge-icon">📢</span>
+                <div>
+                  <h3 class="card-title">Token Display Board</h3>
+                  <span class="card-sub">Digital Token Calling System</span>
+                </div>
+              </div>
+              <span class="token-live-tag">ON DISPLAY</span>
+            </div>
+
+            <div class="now-serving-box">
+              <span class="serving-label">NOW SERVING ON COUNTERS</span>
+              <div class="serving-numbers-grid" id="servingGrid">
+                <div class="token-display-box primary-token">
+                  <span class="token-counter-tag">Counter 1</span>
+                  <span class="token-id" id="tokenC1">A-142</span>
+                  <span class="token-state">Ready</span>
+                </div>
+                <div class="token-display-box">
+                  <span class="token-counter-tag">Counter 2</span>
+                  <span class="token-id" id="tokenC2">B-089</span>
+                  <span class="token-state">Ready</span>
+                </div>
+                <div class="token-display-box">
+                  <span class="token-counter-tag">Counter 3</span>
+                  <span class="token-id" id="tokenC3">C-045</span>
+                  <span class="token-state">Ready</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Token Search Tool -->
+            <div class="token-tracker-form">
+              <label for="studentTokenInput" class="tracker-label">Check Your Order Status:</label>
+              <div class="tracker-input-group">
+                <input 
+                  type="text" 
+                  id="studentTokenInput" 
+                  placeholder="Enter Token (e.g. A-142)" 
+                  class="input-tracker"
+                  maxlength="10"
+                />
+                <button class="btn btn-primary" id="trackTokenBtn">Track</button>
+              </div>
+              <div class="token-track-result" id="tokenResult" style="display: none;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODAY'S SPECIALS & FULL MENU -->
+    <section class="section menu-section" id="specials">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="section-tag">🔥 Campus Favorites</div>
+          <h2 class="section-title">Today's Specials & Quick Bites</h2>
+          <p class="section-subtitle">
+            Freshly prepared with student-friendly pricing. Grab a quick snack between lectures or fuel up with our wholesome meal combos.
+          </p>
+        </div>
+
+        <!-- Category & Filter Controls -->
+        <div class="menu-controls-wrapper" id="menu">
+          <!-- Search Box -->
+          <div class="menu-search-box">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="text" 
+              id="menuSearchInput" 
+              placeholder="Search Biryani, Dosa, Samosa, Cold Coffee..." 
+              class="menu-search-input"
+            />
+            <button class="search-clear-btn" id="searchClearBtn" style="display: none;" aria-label="Clear search">&times;</button>
+          </div>
+
+          <!-- Category Filter Tabs -->
+          <div class="category-tabs" id="categoryTabs" role="tablist">
+            <button class="cat-tab active" data-category="all" role="tab" aria-selected="true">
+              ✨ All Items (<span id="countAll">0</span>)
+            </button>
+            <button class="cat-tab" data-category="specials" role="tab" aria-selected="false">
+              ⭐ Today's Specials (<span id="countSpecials">0</span>)
+            </button>
+            <button class="cat-tab" data-category="meals" role="tab" aria-selected="false">
+              🍛 Lunch & Combos (<span id="countMeals">0</span>)
+            </button>
+            <button class="cat-tab" data-category="tiffin" role="tab" aria-selected="false">
+              🥞 Tiffin & Breakfast (<span id="countTiffin">0</span>)
+            </button>
+            <button class="cat-tab" data-category="snacks" role="tab" aria-selected="false">
+              🥪 Quick Bites & Snacks (<span id="countSnacks">0</span>)
+            </button>
+            <button class="cat-tab" data-category="beverages" role="tab" aria-selected="false">
+              ☕ Beverages & Shakes (<span id="countBeverages">0</span>)
+            </button>
+          </div>
+
+          <!-- Dietary Toggle Filters -->
+          <div class="dietary-filter-bar">
+            <span class="filter-label">Filter Dietary:</span>
+            <button class="diet-filter-pill active" data-diet="all">All</button>
+            <button class="diet-filter-pill" data-diet="veg">
+              <span class="diet-dot veg-dot"></span> Pure Veg
+            </button>
+            <button class="diet-filter-pill" data-diet="non-veg">
+              <span class="diet-dot nonveg-dot"></span> Non-Veg
+            </button>
+            <button class="diet-filter-pill" data-diet="vegan">
+              <span class="diet-dot vegan-dot"></span> Vegan
+            </button>
+          </div>
+        </div>
+
+        <!-- Food Items Grid Layout -->
+        <div class="food-grid" id="foodGrid">
+          <!-- Food items injected dynamically via app.js -->
+        </div>
+
+        <!-- Empty State Message -->
+        <div class="empty-state" id="emptyMenuState" style="display: none;">
+          <div class="empty-icon">🍽️</div>
+          <h3>No mouth-watering items found</h3>
+          <p>Try searching for something else or clear your dietary filters.</p>
+          <button class="btn btn-outline" id="resetFiltersBtn">Reset All Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRE-ORDER & DIGITAL WALLET SECTION -->
+    <section class="section preorder-section" id="preorder">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">⚡ Fast Track Ordering</div>
+          <h2 class="section-title">Pre-Order & Student Digital Wallet</h2>
+          <p class="section-subtitle">
+            Order in advance, schedule your pickup for your lunch or tea break, and checkout seamlessly using UPI or your Vel Tech Student Card.
+          </p>
+        </div>
+
+        <div class="preorder-container-card">
+          <!-- Checkout Steps Indicator -->
+          <div class="checkout-stepper">
+            <div class="step-node active" id="stepNode1">
+              <div class="step-circle">1</div>
+              <span class="step-label">Order Items</span>
+            </div>
+            <div class="step-line" id="stepLine1"></div>
+            <div class="step-node" id="stepNode2">
+              <div class="step-circle">2</div>
+              <span class="step-label">Pick-up Time</span>
+            </div>
+            <div class="step-line" id="stepLine2"></div>
+            <div class="step-node" id="stepNode3">
+              <div class="step-circle">3</div>
+              <span class="step-label">Student ID</span>
+            </div>
+            <div class="step-line" id="stepLine3"></div>
+            <div class="step-node" id="stepNode4">
+              <div class="step-circle">4</div>
+              <span class="step-label">Payment</span>
+            </div>
+          </div>
+
+          <!-- Pre-order Form Body -->
+          <form id="preOrderForm" class="preorder-form">
+            <!-- Step 1: Selected Items & Quick Combos -->
+            <div class="form-step-panel active" id="panelStep1">
+              <div class="panel-header">
+                <h3>Step 1: Review Items in your tray</h3>
+                <p>Add items from the menu or pick one of our rapid student combos below.</p>
+              </div>
+
+              <!-- Cart preview inside preorder -->
+              <div class="tray-preview-container" id="trayPreview">
+                <div class="tray-empty" id="trayEmptyState">
+                  <span class="tray-icon">🛒</span>
+                  <p>Your order tray is currently empty.</p>
+                  <a href="#specials" class="btn btn-sm btn-outline">Explore Today's Menu</a>
+                </div>
+                <div class="tray-items-list" id="trayItemsList" style="display: none;">
+                  <!-- Dynamic items listed here -->
+                </div>
+              </div>
+
+              <!-- Instant Combo Quick Add -->
+              <div class="quick-combos-box">
+                <h4>⚡ Or Click to Quick-Add a Popular Exam-Saver Combo:</h4>
+                <div class="combos-grid">
+                  <button type="button" class="combo-card-btn" data-combo-id="combo-1">
+                    <div class="combo-info">
+                      <span class="combo-title">Lunch Rush Saver</span>
+                      <span class="combo-desc">South Indian Thali + Fresh Lime Soda</span>
+                    </div>
+                    <span class="combo-price">₹105</span>
+                  </button>
+
+                  <button type="button" class="combo-card-btn" data-combo-id="combo-2">
+                    <div class="combo-info">
+                      <span class="combo-title">Evening Energy Boost</span>
+                      <span class="combo-desc">2 Hot Veg Samosas + Filter Kaapi</span>
+                    </div>
+                    <span class="combo-price">₹45</span>
+                  </button>
+
+                  <button type="button" class="combo-card-btn" data-combo-id="combo-3">
+                    <div class="combo-info">
+                      <span class="combo-title">Hostel Dinner Special</span>
+                      <span class="combo-desc">Chicken Biryani + Boiled Egg + Raitha</span>
+                    </div>
+                    <span class="combo-price">₹140</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="step-actions">
+                <div></div>
+                <button type="button" class="btn btn-primary" id="gotoStep2Btn">
+                  <span>Continue to Time Slot</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Pick-up Time Slot -->
+            <div class="form-step-panel" id="panelStep2">
+              <div class="panel-header">
+                <h3>Step 2: Choose Your Pick-up Time Slot</h3>
+                <p>We prepare food fresh so it's piping hot right when your bell rings.</p>
+              </div>
+
+              <div class="time-slots-grid">
+                <label class="time-slot-card">
+                  <input type="radio" name="pickupTime" value="Immediate" checked>
+                  <div class="slot-content">
+                    <div class="slot-badge">Fastest</div>
+                    <span class="slot-time">Immediate Pickup</span>
+                    <span class="slot-note">Ready in 8-12 minutes</span>
+                  </div>
+                </label>
+
+                <label class="time-slot-card">
+                  <input type="radio" name="pickupTime" value="12:30 PM (Break 1)">
+                  <div class="slot-content">
+                    <div class="slot-badge">Lunch Break</div>
+                    <span class="slot-time">12:30 PM Slot</span>
+                    <span class="slot-note">Period 4 Break</span>
+                  </div>
+                </label>
+
+                <label class="time-slot-card">
+                  <input type="radio" name="pickupTime" value="1:15 PM (Break 2)">
+                  <div class="slot-content">
+                    <div class="slot-badge">Lunch Break</div>
+                    <span class="slot-time">1:15 PM Slot</span>
+                    <span class="slot-note">Period 5 Break</span>
+                  </div>
+                </label>
+
+                <label class="time-slot-card">
+                  <input type="radio" name="pickupTime" value="3:45 PM (Snack Break)">
+                  <div class="slot-content">
+                    <div class="slot-badge">Evening</div>
+                    <span class="slot-time">3:45 PM Slot</span>
+                    <span class="slot-note">Afternoon Tea/Snacks</span>
+                  </div>
+                </label>
+
+                <label class="time-slot-card">
+                  <input type="radio" name="pickupTime" value="5:00 PM (Hostel/Lab Break)">
+                  <div class="slot-content">
+                    <div class="slot-badge">Late Break</div>
+                    <span class="slot-time">5:00 PM Slot</span>
+                    <span class="slot-note">Post-Lab & Library Hours</span>
+                  </div>
+                </label>
+              </div>
+
+              <div class="order-notes-wrap">
+                <label for="orderSpecialNotes" class="field-label">Special Cooking Instructions (Optional):</label>
+                <input 
+                  type="text" 
+                  id="orderSpecialNotes" 
+                  placeholder="e.g., Less spicy chutney, extra sambar cup, no onion..." 
+                  class="form-control"
+                />
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn btn-outline" id="backToStep1Btn">Back</button>
+                <button type="button" class="btn btn-primary" id="gotoStep3Btn">
+                  <span>Continue to Student Info</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Student Identification -->
+            <div class="form-step-panel" id="panelStep3">
+              <div class="panel-header">
+                <h3>Step 3: Student Details for Token Generation</h3>
+                <p>Your digital token and pickup PIN will be associated with this registration number.</p>
+              </div>
+
+              <div class="form-grid-inputs">
+                <div class="form-group">
+                  <label for="studentRegNumber" class="field-label">Vel Tech Student ID / Roll No. *</label>
+                  <div class="input-with-icon">
+                    <span class="input-icon">🎓</span>
+                    <input 
+                      type="text" 
+                      id="studentRegNumber" 
+                      name="studentId" 
+                      placeholder="e.g., VTU23BCS108" 
+                      class="form-control" 
+                      required
+                    />
+                  </div>
+                  <small class="field-help">Accepts VTU ID or Faculty Staff ID</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="studentFullName" class="field-label">Student Full Name *</label>
+                  <div class="input-with-icon">
+                    <span class="input-icon">👤</span>
+                    <input 
+                      type="text" 
+                      id="studentFullName" 
+                      name="fullName" 
+                      placeholder="e.g., Karthik Ramanathan" 
+                      class="form-control" 
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="studentPhone" class="field-label">Mobile Number (For Token SMS) *</label>
+                  <div class="input-with-icon">
+                    <span class="input-icon">📱</span>
+                    <input 
+                      type="tel" 
+                      id="studentPhone" 
+                      name="phone" 
+                      placeholder="e.g., 98765 43210" 
+                      class="form-control" 
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="studentDepartment" class="field-label">Department / Block</label>
+                  <select id="studentDepartment" class="form-control">
+                    <option value="CSE / IT">B.Tech - Computer Science / IT</option>
+                    <option value="ECE / EEE">B.Tech - Electronics / Electrical</option>
+                    <option value="Mech / Aero">B.Tech - Mechanical / Aeronautical</option>
+                    <option value="Biotech / Chem">B.Tech - Biotechnology / Chemical</option>
+                    <option value="MBA / Commerce">Management Studies / MBA</option>
+                    <option value="Hosteller">Campus Hosteller (Block A-D)</option>
+                    <option value="Faculty / Staff">Faculty / University Staff</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn btn-outline" id="backToStep2Btn">Back</button>
+                <button type="button" class="btn btn-primary" id="gotoStep4Btn">
+                  <span>Continue to Payment</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 4: Digital Payment Mode -->
+            <div class="form-step-panel" id="panelStep4">
+              <div class="panel-header">
+                <h3>Step 4: Choose Payment Mode</h3>
+                <p>Instant contactless payment powered by Vel Tech Smart Campus Gateway.</p>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div class="payment-methods-grid">
+                <!-- Method 1: UPI -->
+                <label class="pay-method-card">
+                  <input type="radio" name="paymentMethod" value="UPI" checked>
+                  <div class="pay-content">
+                    <div class="pay-icon-row">
+                      <span class="pay-emoji">📲</span>
+                      <span class="pay-tags">GPay • PhonePe • Paytm</span>
+                    </div>
+                    <strong>Instant UPI & QR</strong>
+                    <p>Pay via any UPI app directly at checkout</p>
+                  </div>
+                </label>
+
+                <!-- Method 2: Vel Tech Canteen Card -->
+                <label class="pay-method-card">
+                  <input type="radio" name="paymentMethod" value="CanteenCard">
+                  <div class="pay-content">
+                    <div class="pay-icon-row">
+                      <span class="pay-emoji">💳</span>
+                      <span class="wallet-badge" id="canteenCardBadge">Active: ₹350</span>
+                    </div>
+                    <strong>Vel Tech Canteen Card</strong>
+                    <p>Deducts seamlessly from student prepaid balance</p>
+                  </div>
+                </label>
+
+                <!-- Method 3: Pay on Counter -->
+                <label class="pay-method-card">
+                  <input type="radio" name="paymentMethod" value="CounterCash">
+                  <div class="pay-content">
+                    <div class="pay-icon-row">
+                      <span class="pay-emoji">💵</span>
+                      <span class="pay-tags">Cash / Pos</span>
+                    </div>
+                    <strong>Pay at Counter</strong>
+                    <p>Show token and pay during food collection</p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Order Summary Breakdown -->
+              <div class="order-summary-card">
+                <h4>Order Summary</h4>
+                <div class="summary-line">
+                  <span>Items Subtotal:</span>
+                  <span id="summarySubtotal">₹0</span>
+                </div>
+                <div class="summary-line">
+                  <span>Student Discount (Campus Subsidy):</span>
+                  <span class="text-green" id="summaryDiscount">- ₹0</span>
+                </div>
+                <div class="summary-line">
+                  <span>Packaging & Canteen Cleanliness Fee:</span>
+                  <span class="text-muted">₹0 (Free)</span>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-total-line">
+                  <strong>Total Amount Payable:</strong>
+                  <strong class="total-amount" id="summaryTotal">₹0</strong>
+                </div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn btn-outline" id="backToStep3Btn">Back</button>
+                <button type="submit" class="btn btn-success btn-lg" id="submitOrderBtn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                  <span>Confirm Order & Generate Token</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CART SLIDE-OVER DRAWER -->
+  <aside class="cart-slideover" id="cartSlideover" aria-label="Shopping Cart">
+    <div class="cart-backdrop" id="cartBackdrop"></div>
+    <div class="cart-panel">
+      <div class="cart-header">
+        <div class="cart-title-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <h3>Your Canteen Tray</h3>
+          <span class="cart-pill-count" id="cartHeaderCount">0 items</span>
+        </div>
+        <button class="cart-close-btn" id="closeCartBtn" aria-label="Close cart">&times;</button>
+      </div>
+
+      <!-- Cart Items List -->
+      <div class="cart-body" id="cartItemsContainer">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Cart Footer / Totals -->
+      <div class="cart-footer">
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <strong id="cartSubtotalVal">₹0</strong>
+        </div>
+        <div class="cart-subtotal-row discount-row">
+          <span>Student Perk (5% Off > ₹100)</span>
+          <span class="text-green" id="cartDiscountVal">- ₹0</span>
+        </div>
+        <div class="cart-divider"></div>
+        <div class="cart-total-row">
+          <span>Grand Total</span>
+          <strong class="cart-grand-total" id="cartTotalVal">₹0</strong>
+        </div>
+
+        <button class="btn btn-primary w-full btn-checkout" id="cartCheckoutBtn">
+          <span>Proceed to Pre-Order Slot</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+        <button class="btn-clear-cart" id="clearCartBtn">Clear Tray</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- STUDENT LOGIN / ACCOUNT MODAL -->
+  <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-brand">
+            <span class="logo-mini">🎓</span>
+            <div>
+              <h3>Student Canteen Portal</h3>
+              <p>Vel Tech University Single Sign-On</p>
+            </div>
+          </div>
+          <button class="modal-close" id="closeLoginModal" aria-label="Close modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div id="loginFormContainer">
+            <p class="modal-info-text">
+              Login with your student credentials to view your Vel Tech Canteen Card balance, track active orders, and save payment preferences.
+            </p>
+
+            <form id="studentLoginForm">
+              <div class="form-group">
+                <label for="loginStudentId" class="field-label">Student ID / Roll Number</label>
+                <input 
+                  type="text" 
+                  id="loginStudentId" 
+                  placeholder="e.g., VTU23BCS108" 
+                  class="form-control" 
+                  value="VTU23BCS108"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="loginStudentPin" class="field-label">Campus Portal PIN</label>
+                <input 
+                  type="password" 
+                  id="loginStudentPin" 
+                  placeholder="••••" 
+                  class="form-control" 
+                  value="1234"
+                  required
+                />
+              </div>
+
+              <div class="quick-demo-account-box">
+                <span class="demo-tag">💡 Demo Mode</span>
+                <span>Click login to simulate active student session with ₹350 Canteen Wallet balance.</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-full btn-lg">Log In to Canteen Portal</button>
+            </form>
+          </div>
+
+          <!-- Logged In State View -->
+          <div id="loggedInContainer" style="display: none;">
+            <div class="student-profile-card">
+              <div class="profile-header-flex">
+                <div class="profile-avatar">👨‍🎓</div>
+                <div>
+                  <h4 id="profileName">Karthik R.</h4>
+                  <span class="profile-reg" id="profileReg">VTU23BCS108 • CSE Dept</span>
+                </div>
+              </div>
+
+              <div class="wallet-balance-box">
+                <div class="wallet-left">
+                  <span class="wallet-label">Vel Tech Canteen Card</span>
+                  <span class="wallet-amt" id="profileWalletAmt">₹350.00</span>
+                </div>
+                <button class="btn btn-sm btn-outline" id="topupWalletBtn">+ Recharge</button>
+              </div>
+
+              <div class="student-perks-list">
+                <div class="perk-item">
+                  <span>✅ 5% Student Discount applied</span>
+                </div>
+                <div class="perk-item">
+                  <span>⚡ Priority token slot access</span>
+                </div>
+              </div>
+
+              <button class="btn btn-outline w-full" id="logoutBtn">Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS TOKEN MODAL -->
+  <div class="modal-backdrop" id="tokenReceiptModal" role="dialog" aria-modal="true" style="display: none;">
+    <div class="modal-dialog modal-receipt">
+      <div class="modal-content receipt-box">
+        <div class="receipt-cutout-top"></div>
+        
+        <div class="receipt-header">
+          <div class="success-icon-animated">✓</div>
+          <span class="receipt-store">ANNA PURANA CANTEEN</span>
+          <p class="receipt-campus">Vel Tech R&D Institute • Avadi</p>
+          <div class="receipt-token-badge">
+            <span class="token-super">YOUR ORDER TOKEN</span>
+            <h1 class="token-giant" id="receiptTokenCode">#A-158</h1>
+            <span class="token-slot-time" id="receiptSlotTime">Ready by 1:15 PM</span>
+          </div>
+        </div>
+
+        <div class="receipt-body">
+          <div class="receipt-qr-wrap">
+            <!-- Simulated QR code via SVG -->
+            <svg class="qr-svg" viewBox="0 0 100 100" fill="#1E293B">
+              <rect width="100" height="100" fill="#F8FAFC"/>
+              <!-- Corner anchors -->
+              <rect x="10" y="10" width="24" height="24" fill="#0F172A"/>
+              <rect x="14" y="14" width="16" height="16" fill="#FFF"/>
+              <rect x="18" y="18" width="8" height="8" fill="#FF5722"/>
+
+              <rect x="66" y="10" width="24" height="24" fill="#0F172A"/>
+              <rect x="70" y="14" width="16" height="16" fill="#FFF"/>
+              <rect x="74" y="18" width="8" height="8" fill="#FF5722"/>
+
+              <rect x="10" y="66" width="24" height="24" fill="#0F172A"/>
+              <rect x="14" y="70" width="16" height="16" fill="#FFF"/>
+              <rect x="18" y="74" width="8" height="8" fill="#FF5722"/>
+
+              <!-- QR Patterns -->
+              <rect x="42" y="12" width="6" height="6"/>
+              <rect x="52" y="18" width="8" height="6"/>
+              <rect x="40" y="30" width="6" height="14"/>
+              <rect x="52" y="32" width="14" height="6"/>
+              <rect x="18" y="44" width="12" height="6"/>
+              <rect x="36" y="50" width="10" height="8"/>
+              <rect x="54" y="46" width="8" height="14"/>
+              <rect x="70" y="44" width="16" height="6"/>
+              <rect x="44" y="70" width="8" height="16"/>
+              <rect x="58" y="68" width="14" height="6"/>
+              <rect x="78" y="64" width="8" height="18"/>
+            </svg>
+            <p class="qr-caption">Scan at Canteen Counter Scanner</p>
+          </div>
+
+          <div class="receipt-details">
+            <div class="rec-row">
+              <span>Student ID:</span>
+              <strong id="receiptStudentId">VTU23BCS108</strong>
+            </div>
+            <div class="rec-row">
+              <span>Student Name:</span>
+              <strong id="receiptStudentName">Karthik R.</strong>
+            </div>
+            <div class="rec-row">
+              <span>Payment Mode:</span>
+              <span class="badge-tag" id="receiptPayMethod">UPI Paid</span>
+            </div>
+            <div class="rec-row">
+              <span>Estimated Pickup Counter:</span>
+              <strong id="receiptCounter">Counter 1 & 2</strong>
+            </div>
+            
+            <div class="rec-divider"></div>
+            
+            <div class="receipt-items-summary" id="receiptItemsSummary">
+              <!-- Item lines -->
+            </div>
+
+            <div class="rec-divider"></div>
+
+            <div class="rec-row rec-total">
+              <strong>Paid Amount:</strong>
+              <strong class="text-orange" id="receiptTotalPaid">₹110.00</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="receipt-footer">
+          <p class="receipt-sms-note">📲 Token notification & OTP dispatched to your registered mobile number.</p>
+          <div class="receipt-btn-group">
+            <button class="btn btn-outline" id="printReceiptBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              <span>Save Slip</span>
+            </button>
+            <button class="btn btn-primary" id="closeReceiptBtn">Done & Track Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEEDBACK MODAL -->
+  <div class="modal-backdrop" id="feedbackModal" role="dialog" aria-modal="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-brand">
+            <span class="logo-mini">💬</span>
+            <div>
+              <h3>Canteen Feedback & Suggestions</h3>
+              <p>Directly reviewed by Vel Tech Student Council</p>
+            </div>
+          </div>
+          <button class="modal-close" id="closeFeedbackModal" aria-label="Close modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <form id="feedbackForm">
+            <div class="form-group">
+              <label class="field-label">Food Quality & Hygiene Rating</label>
+              <div class="rating-stars-input" id="starRating">
+                <button type="button" class="star-btn" data-val="1">★</button>
+                <button type="button" class="star-btn" data-val="2">★</button>
+                <button type="button" class="star-btn" data-val="3">★</button>
+                <button type="button" class="star-btn active" data-val="4">★</button>
+                <button type="button" class="star-btn" data-val="5">★</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="feedbackCategory" class="field-label">Category</label>
+              <select id="feedbackCategory" class="form-control">
+                <option value="taste">Food Taste & Freshness</option>
+                <option value="queue">Queue & Speed of Service</option>
+                <option value="hygiene">Seating & Cleanliness</option>
+                <option value="new_item">Request New Menu Item</option>
+                <option value="wallet">Student Card / Billing Issue</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="feedbackComments" class="field-label">Your Comments / Suggestions *</label>
+              <textarea 
+                id="feedbackComments" 
+                rows="3" 
+                placeholder="Share your thoughts to help improve Anna Purana Canteen..." 
+                class="form-control"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full">Submit Feedback</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SECTION -->
+  <footer class="canteen-footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col brand-col">
+          <div class="footer-logo">
+            <span class="brand-title">Anna Purana</span>
+            <span class="brand-tag">Vel Tech Campus Canteen</span>
+          </div>
+          <p class="footer-about">
+            Serving fresh, hygienic, affordable, and authentic meals daily to over 12,000+ students, research scholars, and faculty at Vel Tech Rangarajan Dr. Sagunthala R&D Institute.
+          </p>
+          <div class="hygiene-badge">
+            <span class="shield-icon">🛡️</span>
+            <span>FSSAI Certified Campus Kitchen #12421008000451</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Campus Location & Hours -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Campus Location & Hours</h4>
+          <ul class="footer-list">
+            <li>
+              <span class="icon">📍</span>
+              <div>
+                <strong>Central Food Court (Ground Floor)</strong>
+                <p>Opposite Mechanical Sciences Block & Central Library, Vel Tech Campus, #400 Feet Outer Ring Road, Avadi, Chennai - 600062</p>
+              </div>
+            </li>
+            <li>
+              <span class="icon">⏰</span>
+              <div>
+                <strong>Operating Timings:</strong>
+                <p>Monday – Saturday: 7:30 AM – 8:30 PM</p>
+                <p>Sunday & Campus Holidays: 8:00 AM – 6:00 PM</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Student Council & Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Student Council & Support</h4>
+          <ul class="footer-list">
+            <li>
+              <span class="icon">📞</span>
+              <div>
+                <strong>Canteen Hotline:</strong>
+                <a href="tel:+914462017000" class="footer-link">+91 44 6201 7000 (Ext. 244)</a>
+              </div>
+            </li>
+            <li>
+              <span class="icon">💬</span>
+              <div>
+                <strong>Student Council Helpdesk:</strong>
+                <a href="mailto:canteen.council@veltech.edu.in" class="footer-link">canteen.council@veltech.edu.in</a>
+              </div>
+            </li>
+            <li>
+              <span class="icon">📝</span>
+              <div>
+                <strong>Help Us Improve:</strong>
+                <button class="footer-btn-link" id="openFeedbackBtn">Open Feedback & Suggestion Box</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Quick Navigation -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Shortcuts</h4>
+          <ul class="footer-shortcuts">
+            <li><a href="#specials">Today's Specials</a></li>
+            <li><a href="#menu">Breakfast & Meals Menu</a></li>
+            <li><a href="#live-queue">Live Queue Counter Status</a></li>
+            <li><a href="#preorder">Pre-Order Time Slot</a></li>
+            <li><button class="shortcut-btn" id="footerLoginShortcut">Vel Tech Student Login</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div class="copyright-text">
+          &copy; 2026 Anna Purana Canteen • Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology. All rights reserved.
+        </div>
+        <div class="footer-bottom-links">
+          <span>Student Welfare Initiative</span>
+          <span>•</span>
+          <span>Zero Food Waste Partner</span>
+          <span>•</span>
+          <a href="#hero" class="back-to-top">Back to top ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE BOTTOM STICKY BAR -->
+  <nav class="mobile-bottom-bar" aria-label="Mobile Quick Bar">
+    <a href="#specials" class="mobile-bottom-btn active">
+      <span class="mb-icon">🍱</span>
+      <span>Menu</span>
+    </a>
+    <a href="#live-queue" class="mobile-bottom-btn">
+      <span class="mb-icon">📊</span>
+      <span>Queue</span>
+    </a>
+    <a href="#preorder" class="mobile-bottom-btn">
+      <span class="mb-icon">⚡</span>
+      <span>Pre-Order</span>
+    </a>
+    <button class="mobile-bottom-btn" id="mobileCartTrigger">
+      <div class="mb-cart-wrap">
+        <span class="mb-icon">🛒</span>
+        <span class="mb-cart-badge" id="mobileCartCount">0</span>
+      </div>
+      <span>Tray</span>
+    </button>
+  </nav>
+
+  <!-- TOAST NOTIFICATIONS CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
